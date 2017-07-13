@@ -1,0 +1,48 @@
+<div class="container">
+	<p id="notice"><%= notice %></p>
+	
+	<h1>Listing Printing Tickets</h1>
+	
+	<table>
+	  <thead>
+	    <tr>
+	      <th>Name</th>
+	      <th>Description</th>
+	      <th>Width</th>
+	      <th>Height</th>
+	      <th>Qty</th>
+	      <th>Single</th>
+	      <th>Double</th>
+	      <th>Material</th>
+	      <th>Location</th>
+	      <th>Printer</th>
+	      <th colspan="3"></th>
+	    </tr>
+	  </thead>
+	
+	  <tbody>
+	    <% @printing_tickets.each do |printing_ticket| %>
+	      <tr>
+	        <td><%= printing_ticket.name %></td>
+	        <td><%= printing_ticket.description %></td>
+	        <td><%= printing_ticket.width %></td>
+	        <td><%= printing_ticket.height %></td>
+	        <td><%= printing_ticket.qty %></td>
+	        <td><%= printing_ticket.single %></td>
+	        <td><%= printing_ticket.double %></td>
+	        <td><%= printing_ticket.material_id %></td>
+	        <td><%= printing_ticket.location_id %></td>
+	        <td><%= printing_ticket.printer_id %></td>
+	        <td><%= link_to 'Show', printing_ticket, :class => "btn btn-success" %></td>
+	        <td><%= link_to 'Edit', edit_printing_ticket_path(printing_ticket), :class => "btn btn-warning" %></td>
+	        <td><%= link_to 'Destroy', printing_ticket, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+	
+	<br>
+	
+	<%= link_to 'New Printing ticket', new_printing_ticket_path, :class => "btn btn-info" %>
+	<%= link_to 'Back', projects_path, :class => "btn btn-info" %>
+</div>

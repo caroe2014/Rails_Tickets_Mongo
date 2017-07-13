@@ -1,0 +1,35 @@
+<div class="container">
+	
+	<p id="notice"><%= notice %></p>
+	
+	<h1>Listing Master Groups</h1>
+	
+	<table>
+	  <thead>
+	    <tr>
+	      <th>Name</th>
+	      <th>Level</th>
+	      <th>Status</th>
+	      <th colspan="3"></th>
+	    </tr>
+	  </thead>
+	
+	  <tbody>
+	    <% @master_groups.each do |master_group| %>
+	      <tr>
+	        <td><%= master_group.name %></td>
+	        <td><%= master_group.level %></td>
+	        <td><%= master_group.status %></td>
+	        <td><%= link_to 'Show', master_group, :class => "btn btn-success"   %></td>
+	        <td><%= link_to 'Edit', edit_master_group_path(master_group), :class => "btn btn-warning"   %></td>
+	        <td><%= link_to 'Destroy', master_group, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger"   %></td>
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+	
+	<br>
+	
+	<%= link_to 'New Master group', new_master_group_path, :class => "btn btn-info"   %>
+</div>
+

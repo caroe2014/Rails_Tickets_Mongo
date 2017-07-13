@@ -1,0 +1,88 @@
+
+<div class="container">
+<nav class="navbar navbar-default">
+  
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><%= @company_name %></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Projects <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to('New', {:controller => 'projects', :action => 'new'}) %></li>
+            <li><%= link_to('List', {:controller => 'projects', :action => 'index'}) %></li>
+            <li><a href="#">Save</a></li>
+            <li><a href="#">Save As</a></li>
+            <li role="separator" class="divider"></li>
+             <li><a href="#">Change priority</a></li>
+            <li><a href="#">Close</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Exit</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reports <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Prioritized projects</a></li>
+            <li><a href="#">Tasks Status</a></li>
+            <li><a href="#">Completed Tasks</a></li>
+            <li><a href="#">Utilization of resources</a></li>
+          </ul>
+        </li>        
+      </ul>
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "My Profile", edit_user_registration_path %></li>
+            <li><%= link_to "Company", companies_path  %></li>
+            <li><%= link_to "Locations", locations_path %></li>
+            <li><a href="#">Resources</a></li>
+           
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Wizard</a></li>
+          </ul>
+        </li>
+
+
+		<% if user_signed_in? %>
+		   <li>
+		   	  <%= link_to "Logout", destroy_user_session_path, method: :delete  %>
+		   </li>	   	
+		<% else %>
+		   <li>
+		   	  <%= link_to "Login", new_user_session_path %>
+		   </li>
+		   <li>		   	
+		   	  <%= link_to "Sing Up", new_user_registration_path %>
+		   </li>	   	
+		<% end %>
+
+ 		<% if user_signed_in? %>       
+            <a class="navbar-brand" href="#">Hi, <strong><%= current_user.email %></strong></a>
+        <% end %>
+            
+      </ul>
+    </div><!-- /.navbar-collapse -->
+ 
+</nav>
+
+ </div><!-- /.container-fluid -->

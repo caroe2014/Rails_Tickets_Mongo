@@ -1,0 +1,34 @@
+<div class="container">
+	<p id="notice"><%= notice %></p>
+	
+	<p>
+	<h1>Your User is now an Application administrator</h1>
+	
+	<h3>You can create other Administrator Later</h3>	
+		
+	  <strong>Company:</strong>
+	  <% company = Company.find(@company_group.company_id) %>
+	  <%= company.name %>
+	</p>
+	
+	<p>
+	  <strong>User:</strong>
+	  <% user = User.find(@company_group.user_id)%>
+	  
+	  <%= user.email %>
+	</p>
+	
+	<p>
+	  <strong>Name:</strong>
+	  <% master = MasterGroup.find(@company_group.mastergroup_id) %>
+	  <%= master.name %>
+	</p>
+	
+	<p>
+	  <strong>Status:</strong>
+	  <%= @company_group.status %>
+	</p>
+	
+	<%= link_to 'Edit', edit_company_group_path(@company_group), :class => "btn btn-info"  %> |
+	<%= link_to 'Finish', root_path, :class => "btn btn-info"  %>
+</div>

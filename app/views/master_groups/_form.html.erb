@@ -1,0 +1,29 @@
+<%= form_for(@master_group) do |f| %>
+  <% if @master_group.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@master_group.errors.count, "error") %> prohibited this master_group from being saved:</h2>
+
+      <ul>
+      <% @master_group.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :level %><br>
+    <%= f.number_field :level %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.number_field :status %>
+  </div>
+  <div class="actions btn btn-info">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,61 @@
+
+<div class="container">
+
+	<h1>Show Project</h1>
+
+	<p id="notice"><%= notice %></p>
+	
+	<p>
+	  <strong>Name:</strong>
+	  <%= @project.name %>
+	</p>
+	<p>
+	  <strong>Nickname:</strong>
+	  <%= @project.nickname %>
+	</p>
+	<p>
+	  <strong>Number:</strong>
+	  <%= @project.project_number %>
+	</p>
+	<p>
+	  <strong>Client:</strong>
+	  <%= @project.client %>
+	</p>
+	<p>
+	  <strong>Estimate:</strong>
+	  <%= @project.estimate %>
+	</p>
+	<p>
+	  <strong>Phone:</strong>
+	  <%= @project.phone %>
+	</p>
+	<p>
+	  <strong>Status:</strong>
+	  <%= @project.status %>
+	</p>
+	<p>
+	  <strong>Appoved Budget:</strong>
+	  <%= @project.approved_budget %>
+	</p>
+	<p>
+	  <strong>Accumulated Cost:</strong>
+	  <%= @project.accumulated_cost %>
+	</p>
+	<p>
+	  <strong>Accumulated Cost:</strong>
+	  <%= @project.accumulated_cost %>
+	</p>
+	<p>
+	  <strong>Items:</strong>
+	  <%= @project.items_to_do %>
+	</p>
+	<p>
+	  <strong>Porcentage Done:</strong>
+	  <%= @project.porcentage_done %>
+	</p>
+	
+	<%= link_to 'Edit', edit_project_path(@project), :class => "btn btn-info" %> |
+	<%= link_to 'Back', projects_path, :class => "btn btn-info"  %>
+</div>
+
+

@@ -1,0 +1,50 @@
+<div class="container">
+	<h1>Listing companies</h1>
+	
+	<table>
+	  <thead>
+	    <tr>
+	      <th>Name</th>
+	      <th>Phone</th>
+	      <th>Webpage</th>
+	      <th>Contact</th>
+	      <th>Address1</th>
+	      <th>Address2</th>
+	      <th>City</th>
+	      <th>State</th>
+	      <th>Country</th>
+	      <th>Action</th>
+	      <th></th>
+	      <th></th>
+	      <th></th>
+	    </tr>
+	  </thead>
+	  
+	  <tbody>
+	    <% @companies.each do |company| %>
+	      <tr>
+	        <td><%= company.name %></td>
+	        <td><%= company.phone %></td>
+	        <td><%= company.webpage %></td>
+	        <td><%= company.contact %></td>
+	        <td><%= company.address1 %></td>
+	        <td><%= company.address2 %></td>
+	        <td><%= company.city %></td>
+	        <td><%= company.state %></td>
+	        <td><%= company.country %></td>
+	        <div class="btn-group">
+		        <td><%= link_to 'Show', company, :class => "btn btn-success"  %></td>
+		        <td><%= link_to 'Edit', edit_company_path(company), :class => "btn btn-warning" %></td>
+		        <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+		     </div>   
+	      </tr>
+	    <% end %>
+	  </tbody>
+		  
+	</table>
+	
+	<br>
+	 
+	  <%= link_to 'New Company', new_company_path, :id => "nueva-company", :class => "btn btn-info"%>
+      <%= link_to 'Back', main_menus_home_path, :class => "btn btn-info" %>
+</div>

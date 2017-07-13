@@ -1,0 +1,66 @@
+<%= form_for(@printing_ticket) do |f| %>
+  <% if @printing_ticket.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@printing_ticket.errors.count, "error") %> prohibited this printing_ticket from being saved:</h2>
+
+      <ul>
+      <% @printing_ticket.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :width %><br>
+    <%= f.text_field :width %>
+  </div>
+  <div class="field">
+    <%= f.label :height %><br>
+    <%= f.text_field :height %>
+  </div>
+  <div class="field">
+    <%= f.label :qty %><br>
+    <%= f.text_field :qty %>
+  </div>
+
+  <div class="field">
+    <%= f.label :single %><br />
+    <%= f.label :single, "Yes", :value => "true"  %>
+    <%= f.radio_button :single, true, :checked => true %>
+    <%= f.label :single, "No", :value => "false" %>
+    <%= f.radio_button :single, false%>
+  </div>
+  
+  <div class="field">
+    <%= f.label :double %><br />
+    <%= f.label :double, "Yes", :value => "true"  %>
+    <%= f.radio_button :double, true %>
+    <%= f.label :double, "No", :value => "false" %>
+    <%= f.radio_button :double, false, :checked => true %>
+  </div>   
+
+  <div class="field">
+    <%= f.label :material_id %><br>
+    <%= f.text_field :material_id %>
+  </div>
+  <div class="field">
+    <%= f.label :location_id %><br>
+    <%= f.text_field :location_id %>
+  </div>
+  <div class="field">
+    <%= f.label :printer_id %><br>
+    <%= f.text_field :printer_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

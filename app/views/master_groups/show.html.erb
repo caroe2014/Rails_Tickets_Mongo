@@ -1,0 +1,24 @@
+<div class="container">
+
+	<p id="notice"><%= notice %></p>
+	
+	<h1>Show Menu</h1>
+	
+	<p>		
+	  <strong>Name:</strong>
+	  <%= @master_group.name %>
+	</p>
+	
+	<p>
+	  <strong>Level:</strong>
+	  <%= @master_group.level %>
+	</p>
+	
+	<p>
+	  <strong>Status:</strong>
+	  <%= @master_group.status %>
+	</p>
+	
+	<%= link_to 'Edit', edit_master_group_path(@master_group), :class => "btn btn-warning"    %> |
+	<%= link_to 'Back', master_groups_path, :class => "btn btn-info"    %>
+</div>

@@ -1,0 +1,45 @@
+
+<% company = Company.find(session[:company_id] )  %>
+<% user = User.where( { :token_id => session[:token_id] } ).first %>
+<% group = MasterGroup.where( { :name => "App Admin" } ).first %>
+
+<%= form_for(@company_group) do |f| %>
+
+<%  @company_group.company_id = company._id %>
+<%  @company_group.user_id = user._id %>
+<%  @company_group.mastergroup_id = group._id %>
+<%  @company_group.status = 2 %>
+
+  <% if @company_group.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@company_group.errors.count, "error") %> prohibited this company_group from being saved:</h2>
+
+      <ul>
+      <% @company_group.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field">
+    <%= f.label :company_id %><br>
+    <%= f.text_field :company_id %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.text_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :mastergroup_id %><br>
+    <%= f.text_field :mastergroup_id %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.number_field :status %>
+  </div>
+  <div class="actions btn btn-info" >
+    <%= f.submit %>
+  </div>
+<% end %>

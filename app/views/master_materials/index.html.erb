@@ -1,0 +1,49 @@
+<div class="container">
+	<p id="notice"><%= notice %></p>
+	
+	<h1>Listing Master Materials</h1>
+	
+	<table>
+	  <thead>
+	    <tr>
+	      <th>Name</th>
+	      <th>Description</th>
+	      <th>Material type</th>
+	      <th>Width</th>
+	      <th>Length</th>
+	      <th>Units</th>
+	      <th>Unit cost</th>
+	      <th>Quantity</th>
+	      <th>Quantity cost</th>
+	      <th>Status</th>
+	      <th colspan="3"></th>
+	    </tr>
+	  </thead>
+	
+	  <tbody>
+	    <% @master_materials.each do |master_material| %>
+	      <tr>
+	        <td><%= master_material.name %></td>
+	        <td><%= master_material.description %></td>
+	        <td><%= master_material.material_type %></td>
+	        <td><%= master_material.width %></td>
+	        <td><%= master_material.length %></td>
+	        <td><%= master_material.units %></td>
+	        <td><%= master_material.unit_cost %></td>
+	        <td><%= master_material.quantity %></td>
+	        <td><%= master_material.quantity_cost %></td>
+	        <td><%= master_material.status %></td>
+	        <td><%= link_to 'Show', master_material, :class => "btn btn-success" %></td>
+	        <td><%= link_to 'Edit', edit_master_material_path(master_material), :class => "btn btn-warning" %></td>
+	        <td><%= link_to 'Destroy', master_material, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+	      </tr>
+		  <div class="new-registro" style="display:none;"></div>
+
+	    <% end %>
+	  </tbody>
+	</table>
+	
+	<br>
+	
+	<%= link_to 'New Master material', new_master_material_path, :class => "btn btn-info" %>
+</div>

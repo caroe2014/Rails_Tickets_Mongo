@@ -1,0 +1,56 @@
+<div class="container">
+	<p id="notice"><%= notice %></p>
+	
+	<p>
+	  <strong>Name:</strong>
+	  <%= @printing_ticket.name %>
+	</p>
+	
+	<p>
+	  <strong>Description:</strong>
+	  <%= @printing_ticket.description %>
+	</p>
+	
+	<p>
+	  <strong>Width:</strong>
+	  <%= @printing_ticket.width %>
+	</p>
+	
+	<p>
+	  <strong>Height:</strong>
+	  <%= @printing_ticket.height %>
+	</p>
+	
+	<p>
+	  <strong>Qty:</strong>
+	  <%= @printing_ticket.qty %>
+	</p>
+	
+	<p>
+	  <strong>Single:</strong>
+	  <%= @printing_ticket.single %>
+	</p>
+	
+	<p>
+	  <strong>Double:</strong>
+	  <%= @printing_ticket.double %>
+	</p>
+	
+	<p>
+	  <strong>Material:</strong>
+	  <%= @printing_ticket.material_id %>
+	</p>
+	
+	<p>
+	  <strong>Location:</strong>
+	  <%= @printing_ticket.location_id %>
+	</p>
+	
+	<p>
+	  <strong>Printer:</strong>
+	  <%= @printing_ticket.printer_id %>
+	</p>
+	
+	<%= link_to 'Edit', edit_printing_ticket_path(@printing_ticket), :class => "btn btn-info" %> |
+	<%= link_to 'Back', printing_tickets_path, :class => "btn btn-info" %>
+</div>

@@ -1,0 +1,55 @@
+<div class="container">
+   <div id="show-company">
+		<h1>Showing company</h1>
+		
+		<p id="notice"><%= notice %></p>
+		
+			<p>
+			  <strong>Name:</strong>
+			  <%= @company.name %>
+			</p>
+			
+			<p>
+			  <strong>Phone:</strong>
+			  <%= @company.phone %>
+			</p>
+			
+			<p>
+			  <strong>Webpage:</strong>
+			  <%= @company.webpage %>
+			</p>
+			
+			<p>
+			  <strong>Contact:</strong>
+			  <%= @company.contact %>
+			</p>
+			
+			<p>
+			  <strong>Address1:</strong>
+			  <%= @company.address1 %>
+			</p>
+			
+			<p>
+			  <strong>Address2:</strong>
+			  <%= @company.address2 %>
+			</p>
+			
+			<p>
+			  <strong>City:</strong>
+			  <%= @company.city %>
+			</p>
+			
+			<p>
+			  <strong>State:</strong>
+			  <%= @company.state %>
+			</p>
+			
+			<p>
+			  <strong>Country:</strong>
+			  <%= @company.country %>
+			</p>
+			
+		<%= link_to 'Edit', edit_company_path(@company), :class => "btn btn-info"  %> |
+		<%= link_to 'Next', new_user_registration_path, :class => "btn btn-info"  %>
+	</div>
+</div>
