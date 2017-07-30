@@ -1,0 +1,36 @@
+<div class="container">
+	<p id="notice"><%= notice %></p>
+	
+	<h1>Listing Local Equipments</h1>
+	
+	<table>
+	  <thead>
+	    <tr>
+	      <th>Location</th>	    	
+	      <th>Name</th>
+	      <th>Equipment type</th>
+	      <th>Status</th>
+	      <th colspan="3"></th>
+	    </tr>
+	  </thead>
+	
+	  <tbody>
+	    <% @local_equipments.each do |local_equipment| %>
+	      <tr>
+	        <td><%= local_equipment.location.name %></td>
+	        <td><%= local_equipment.name %></td>
+	        <td><%= local_equipment.equipment_type %></td>
+	        <td><%= local_equipment.status %></td>
+
+	        <td><%= link_to 'Show', local_equipment, :class => "btn btn-success" %></td>
+	        <td><%= link_to 'Edit', edit_local_equipment_path(local_equipment), :class => "btn btn-warning" %></td>
+	        <td><%= link_to 'Destroy', local_equipment, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+	
+	<br>
+	
+	<%= link_to 'New Local equipment', new_local_equipment_path, :class => "btn btn-info" %>
+</div>

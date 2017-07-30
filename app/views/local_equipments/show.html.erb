@@ -1,0 +1,27 @@
+<div class="container">
+	<p id="notice"><%= notice %></p>
+
+    <h1>Show Equipment</h1>
+
+	<p>
+	  <strong>Location:</strong>
+	  <%= @local_equipment.location.name %>
+	</p>
+	
+	<p>
+	  <strong>Name:</strong>
+	  <%= @local_equipment.name %>
+	</p>
+	
+	<p>
+	  <strong>Equipment type:</strong>
+	  <%= @local_equipment.equipment_type %>
+	</p>
+	
+	<p>
+	  <strong>Status:</strong>
+	  <%= @local_equipment.status %>
+	</p>
+	
+	<%= link_to 'Back', local_equipments_path, :class => "btn btn-info"  %>
+</div>

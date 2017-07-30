@@ -1,3 +1,5 @@
+<% @location.company_id = session[:company_id] %>
+
 <%= form_for(@location) do |f| %>
   <% if @location.errors.any? %>
     <div id="error_explanation">
@@ -12,10 +14,6 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :company_id %><br>
-    <%= f.text_field :company_id %>
-  </div>
-  <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
@@ -23,6 +21,17 @@
     <%= f.label :shortname %><br>
     <%= f.text_field :shortname %>
   </div>
+
+  <div class="field">
+    <%= f.label :contact_name %><br>
+    <%= f.text_field :contact_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :phone %><br>
+    <%= f.text_field :phone %>
+  </div>
+
   <div class="field">
     <%= f.label :address1 %><br>
     <%= f.text_field :address1 %>

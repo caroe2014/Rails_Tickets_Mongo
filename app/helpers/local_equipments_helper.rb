@@ -1,0 +1,2 @@
+module LocalEquipmentsHelper
+end

@@ -1,6 +1,7 @@
 class PrintingTicketsController < ApplicationController
   before_action :set_printing_ticket, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_company_in_session
+  
   # GET /printing_tickets
   # GET /printing_tickets.json
   def index
@@ -25,8 +26,9 @@ class PrintingTicketsController < ApplicationController
   # POST /printing_tickets.json
   def create
     @printing_ticket = PrintingTicket.new(printing_ticket_params)
-
+       
     respond_to do |format|
+
       if @printing_ticket.save
         format.html { redirect_to @printing_ticket, notice: 'Printing ticket was successfully created.' }
         format.json { render :show, status: :created, location: @printing_ticket }
@@ -69,6 +71,6 @@ class PrintingTicketsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def printing_ticket_params
-      params.require(:printing_ticket).permit(:name, :description, :width, :height, :qty, :single, :double, :material, :location_id, :printer_id)
+      params.require(:printing_ticket).permit(:name, :subname, :description, :width, :height, :qty, :single, :double, :material_id, :equipment_id, :material_idc, :equipment_idc, :location_id, :printer_id)
     end
 end

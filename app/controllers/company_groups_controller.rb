@@ -1,6 +1,7 @@
 class CompanyGroupsController < ApplicationController
   before_action :set_company_group, only: [:show, :edit, :update, :destroy]
-
+  
+  
   # GET /company_groups
   # GET /company_groups.json
   def index

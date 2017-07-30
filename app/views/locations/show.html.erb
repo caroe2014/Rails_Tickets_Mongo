@@ -3,7 +3,8 @@
 	
 	<p>
 	  <strong>Company:</strong>
-	  <%= @location.company %>
+	  <% company = Company.where( { :_id => @location.company_id } ).first %>
+	  <%= company.name %>
 	</p>
 	
 	<p>
@@ -14,6 +15,11 @@
 	<p>
 	  <strong>Shortname:</strong>
 	  <%= @location.shortname %>
+	</p>
+
+	<p>
+	  <strong>Contact Name:</strong>
+	  <%= @location.contact_name %>
 	</p>
 	
 	<p>

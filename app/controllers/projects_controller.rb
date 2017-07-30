@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_company_in_session
 
   # GET /projects
   # GET /projects.json
@@ -62,6 +63,10 @@ class ProjectsController < ApplicationController
   end
 
   private
+  
+    def set_company_in_session
+      @company = Company.find(session[:company_id])
+    end  
     # Use callbacks to share common setup or constraints between actions.
     def set_project
       @project = Project.find(params[:id])

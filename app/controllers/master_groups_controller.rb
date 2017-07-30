@@ -1,6 +1,7 @@
 class MasterGroupsController < ApplicationController
   before_action :set_master_group, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_company_in_session
+  
   # GET /master_groups
   # GET /master_groups.json
   def index

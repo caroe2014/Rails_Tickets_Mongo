@@ -1,0 +1,41 @@
+<div class="container">
+	<%= form_for(@local_equipment) do |f| %>
+	
+	  <% if @local_equipment.errors.any? %>
+	    <div id="error_explanation">
+	      <h2><%= pluralize(@local_equipment.errors.count, "error") %> prohibited this company from being saved:</h2>
+	
+	      <ul>
+	      <% @local_equipment.errors.full_messages.each do |msg| %>
+	        <li><%= msg %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+	  <% end %>
+	
+	  <div class="field">  
+	     <%  @aux = Location.where( { :company_id => session[:company_id] }  ) %>
+	     <%= f.collection_select :location_id, @aux, :_id, :name, include_blanks: true %>
+	  </div>
+	
+	  <div class="field">
+	     <%= f.label :name %><br>
+	     <%= f.text_field :name %>
+	  </div>
+	
+	  <div class="field">
+	     <%= f.label :equipment_type %><br>
+	     <%= f.text_field :equipment_type %>
+	  </div>
+	
+	  <div class="field">
+	     <%= f.label :status %><br>
+	     <%= f.text_field :status %>
+	  </div>
+	  
+	  <div class="actions btn btn-info">
+	    <%= f.submit %>
+	  </div>
+	  
+	<% end %>
+</div>

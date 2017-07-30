@@ -1,10 +1,18 @@
 class LocationsController < ApplicationController
   before_action :set_location, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_company_in_session
+#  before_action :verify_logged_in_user
+  
   # GET /locations
   # GET /locations.json
   def index
-    @locations = Location.all
+
+#    @locations = Location.where( {:company_id => session[:company_id] } ).first
+     @company = Company.where( { :name => 'Freeman Decorating Inc' } ).first
+     
+     session[:company_id] = @company._id.to_s
+     
+     @locations = Location.where( { :company_id => @company._id } )
   end
 
   # GET /locations/1
@@ -24,8 +32,11 @@ class LocationsController < ApplicationController
   # POST /locations
   # POST /locations.json
   def create
+  
     @location = Location.new(location_params)
-
+    
+    @location.company_id = session[:company_id]
+    
     respond_to do |format|
       if @location.save
         format.html { redirect_to @location, notice: 'Location was successfully created.' }
@@ -64,11 +75,15 @@ class LocationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_location
+      @company = Company.where( { :name => 'Freeman Decorating Inc' } ).first
+      
+      session[:company_id] = @company._id.to_s
+      
       @location = Location.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def location_params
-      params.require(:location).permit(:company_id, :name, :shortname, :address1, :address2)
+      params.require(:location).permit(:company_id, :name, :shortname, :contact_name, :phone, :address1, :address2)
     end
 end

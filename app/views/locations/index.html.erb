@@ -6,7 +6,7 @@
 	<table>
 	  <thead>
 	    <tr>
-	      <th>Company</th>
+
 	      <th>Name</th>
 	      <th>Shortname</th>
 	      <th>Address1</th>
@@ -18,14 +18,14 @@
 	  <tbody>
 	    <% @locations.each do |location| %>
 	      <tr>
-	        <td><%= location.company %></td>
+	      	
 	        <td><%= location.name %></td>
 	        <td><%= location.shortname %></td>
 	        <td><%= location.address1 %></td>
 	        <td><%= location.address2 %></td>
-	        <td><%= link_to 'Show', location %></td>
-	        <td><%= link_to 'Edit', edit_location_path(location) %></td>
-	        <td><%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	        <td><%= link_to 'Show', location ,:class => "btn btn-success" %></td>
+	        <td><%= link_to 'Edit', edit_location_path(location), :class => "btn btn-warning" %></td>
+	        <td><%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
 	      </tr>
 	    <% end %>
 	  </tbody>

@@ -38,17 +38,17 @@
 	
 	<p>
 	  <strong>Material:</strong>
-	  <%= @printing_ticket.material_id %>
+	  <%= @printing_ticket.local_materials.name %>
 	</p>
 	
 	<p>
 	  <strong>Location:</strong>
-	  <%= @printing_ticket.location_id %>
+	  <%= @printing_ticket.location.name %>
 	</p>
 	
 	<p>
 	  <strong>Printer:</strong>
-	  <%= @printing_ticket.printer_id %>
+	  <%= @printing_ticket.local_equipments.name %>
 	</p>
 	
 	<%= link_to 'Edit', edit_printing_ticket_path(@printing_ticket), :class => "btn btn-info" %> |

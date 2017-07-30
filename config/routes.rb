@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  resources :master_materials
+  resources :local_equipments
+  resources :local_materials
   resources :master_groups
   resources :company_groups
   resources :printing_tickets

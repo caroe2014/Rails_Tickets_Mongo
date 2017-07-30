@@ -16,7 +16,11 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :description %><br>
+    <%= f.label :subname, "Line Item" %><br>
+    <%= f.text_field :subname %>
+  </div>  
+  <div class="field">
+    <%= f.label :description, "Comments" %><br>
     <%= f.text_field :description %>
   </div>
   <div class="field">
@@ -42,25 +46,52 @@
   
   <div class="field">
     <%= f.label :double %><br />
-    <%= f.label :double, "Yes", :value => "true"  %>
-    <%= f.radio_button :double, true %>
-    <%= f.label :double, "No", :value => "false" %>
-    <%= f.radio_button :double, false, :checked => true %>
+        <%= f.label :double, "Yes", :value => "true"  %>
+        <%= f.radio_button :double, true %>
+        <%= f.label :double, "No", :value => "false" %>
+        <%= f.radio_button :double, false, :checked => true %>
   </div>   
+  
 
-  <div class="field">
-    <%= f.label :material_id %><br>
-    <%= f.text_field :material_id %>
-  </div>
-  <div class="field">
-    <%= f.label :location_id %><br>
-    <%= f.text_field :location_id %>
-  </div>
-  <div class="field">
-    <%= f.label :printer_id %><br>
-    <%= f.text_field :printer_id %>
-  </div>
-  <div class="actions">
+   <div class="field">  
+  	 <%= f.label :location_id, "Location" %>
+    
+     <%  @aux = set_one_location_from_company(session[:company_id]) %>
+     <%= f.collection_select :location_id, @aux, :_id, :name, include_blanks: true %>
+
+   </div>
+
+   <% @company = set_company_from_session(session[:company_id]) %>
+   <% @location1 = set_one_location_from_company(session[:company_id]) %>
+
+   <div class="field">  
+   	
+     <%= f.label :material_id, "Material" %>
+          
+     <%= f.grouped_collection_select(
+                                   :material_id, 
+                                   @location1, 
+                                   :local_materials, 
+                                   :name, 
+                                   :_id, 
+                                   :name)  %>
+  
+   </div>
+ 
+   <div class="field">  
+     
+     <%= f.label :equipment_id, "Equipment" %>
+     
+     <%= f.grouped_collection_select( 
+                                   :equipment_id, 
+                                   @location1, 
+                                   :local_equipments, 
+                                   :name, 
+                                   :_id, 
+                                   :name)  %>
+  </div> 
+  
+  <div class="actions btn btn-info">
     <%= f.submit %>
   </div>
 <% end %>

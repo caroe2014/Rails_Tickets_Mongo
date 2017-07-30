@@ -2,6 +2,7 @@ class Location
   include Mongoid::Document
   include Mongoid::Timestamps
     
+  field :company_id, type: String
   field :name, type: String
   field :shortname, type: String
   field :contact_name, type: String
@@ -13,4 +14,7 @@ class Location
   
   belongs_to :company
   belongs_to :project
+  has_many :local_materials
+  has_many :local_equipments
+  has_many :printing_tickets
 end

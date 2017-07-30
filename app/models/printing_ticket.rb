@@ -1,17 +1,35 @@
 class PrintingTicket
   include Mongoid::Document
+  include Mongoid::Timestamps
+  include Mongoid::Attributes::Dynamic
+  
   field :name, type: String
-  field :description, type: String
-  field :width, type: String
-  field :height, type: String
-  field :qty, type: String
-  field :single, type: String
-  field :double, type: String
+  field :subname, type: String
+  field :description, type: String, default: " "
+  field :width, type: BigDecimal, default: 0.0
+  field :height, type: BigDecimal, default: 0.0
+  field :qty, type: Integer, default: 0
+  field :single, type: Boolean, default: false
+  field :double, type: Boolean, default: false
   field :material_id, type: String
+  field :equipment_id, type: String
   field :location_id, type: String
-  field :printer_id, type: String
   field :project_id, type: String
+  field :workflow_state, type: String
+  
+  index({ name: 1 }, { unique: false, name: "ticketnumber_index" })
   
   belongs_to :project
   belongs_to :location
+  has_many :local_materials
+  has_many :local_equipments
+  
+  def material_idc=(material)
+    self.material_id = material
+  end
+
+  def equipment_idc=(equipo)
+    self.equipment_id = equipo
+  end
+ 
 end

@@ -10,20 +10,31 @@ class ApplicationController < ActionController::Base
   helper :company_groups
   
   def verify_logged_in_user
-      if ! user_signed_in?
-         redirect_to new_user_session_path
-      else
+                               
+        if ! user_signed_in?
+           redirect_to new_user_session_path
+        else
+          @user = User.where( { :email => current_user.email } ).first
+                   
+          @cg   = CompanyGroup.where( { :user_id => @user._id } ).first
+                  
+          @company = Company.where( { :_id => @cg.company_id } ) .first
+                  
+          @mastergroup = MasterGroup.where( {:_id => @cg.mastergroup_id } ).first
+                    
+          session[:company_id] = @company._id.to_s
+          session[:user_id] = @user._id.to_s
+          session[:mastergroup_id] = @mastergroup._id.to_s  
+        
+        end
+    
 
-        @user = User.where( { :email => current_user.email } ).first
-        @cg   = CompanyGroup.where( { :user_id => @user._id } ).first
-        @company = Company.where( { :_id => @cg.company_id } ) .first
-        @mastergroup = MasterGroup.where( {:_id => @cg.mastergroup_id } ).first
-        session[:company_id] = @company._id.to_s
-        session[:user_id] = @user._id.to_s
-        session[:mastergroup_id] = @mastergroup._id.to_s  
-
-      end   
   end
+  
+  def set_company_in_session                
+      @company = Company.find( session[:company_id] )
+      @company_name = @company.name         
+  end 
       
   protected
      

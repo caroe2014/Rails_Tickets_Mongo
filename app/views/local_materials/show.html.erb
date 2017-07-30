@@ -1,0 +1,27 @@
+<div class="container">
+	<p id="notice"><%= notice %></p>
+	
+	<h1>Show Material</h1>
+	<p>
+	  <strong>Location:</strong>
+	  <%= @local_material.location.name %>
+	</p>
+	
+	<p>
+	  <strong>Name:</strong>
+	  <%= @local_material.name %>
+	</p>
+	
+	<p>
+	  <strong>Quantity:</strong>
+	  <%= @local_material.quantity %>
+	</p>
+	
+	<p>
+	  <strong>Status:</strong>
+	  <%= @local_material.status %>
+	</p>
+	
+
+	<%= link_to 'Back', local_materials_path, :class => "btn btn-info" %>
+</div>

@@ -20,7 +20,10 @@ class Project
   field :end_project, type: Date
   field :porcentage_done, type: BigDecimal, :default => 0.0
   field :register_status, type: Integer, :default => 0
-
+  field :sign_off, type: String
+  field :ship_date, type: String
+  field :project_manager, type: String
+  field :paperwork_rcvd_date, type: String 
   index({ nickname: 1 }, { unique: true, name: "nickname_index" })
 
   belongs_to :company
