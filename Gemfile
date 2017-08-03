@@ -47,7 +47,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.5'
-  gem 'capybara', '~> 2.7.0' 
+  gem 'capybara', '~> 2.7.0'
+  gem 'selenium-webdriver', '~> 3.4', '>= 3.4.1' 
+
   gem 'debugger'
 # gem 'byebug
 end

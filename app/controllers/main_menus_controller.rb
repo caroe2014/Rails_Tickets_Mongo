@@ -7,7 +7,7 @@ class MainMenusController < ApplicationController
     
     if user_signed_in?
        if defined? @company
-         @company_name = @company.name
+         @company_name = @company
        end
     end
   end

@@ -5,7 +5,25 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    session[:company_id] = @company._id.to_s
+   
+    if ! params[:search].nil?            
+       @projects = Project.search_by_nickname(@company._id, params[:search]) 
+       debugger
+       if @projects.empty?
+           @projects = Project.search_by_number(@company._id, params[:search])
+           
+           debugger
+           
+       elsif @projects.empty?
+            @projects = Project.search_by_name(@company._id, params[:search]) 
+           
+       end  
+         
+    else
+    
+       @projects = Project.where(company_id: session[:company_id])
+    end
   end
 
   # GET /projects/1
@@ -25,8 +43,11 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
+    
     @project = Project.new(project_params)
 
+    @project.company_id = session[:company_id] 
+   
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: 'Project was successfully created.' }

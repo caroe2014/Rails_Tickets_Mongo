@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
   
   def set_company_in_session                
       @company = Company.find( session[:company_id] )
-      @company_name = @company.name         
+      @company_name = @company        
   end 
       
   protected

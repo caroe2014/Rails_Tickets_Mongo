@@ -8,7 +8,6 @@ class LocationsController < ApplicationController
   def index
 
 #    @locations = Location.where( {:company_id => session[:company_id] } ).first
-     @company = Company.where( { :name => 'Freeman Decorating Inc' } ).first
      
      session[:company_id] = @company._id.to_s
      
@@ -75,7 +74,6 @@ class LocationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_location
-      @company = Company.where( { :name => 'Freeman Decorating Inc' } ).first
       
       session[:company_id] = @company._id.to_s
       

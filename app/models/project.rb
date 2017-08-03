@@ -24,10 +24,34 @@ class Project
   field :ship_date, type: String
   field :project_manager, type: String
   field :paperwork_rcvd_date, type: String 
-  index({ nickname: 1 }, { unique: true, name: "nickname_index" })
+  index({ name: 1, nickname: 1 }, { unique: true})
 
   belongs_to :company
   has_many :printing_tickets
   has_many :locations
-    
+ 
+  validates_presence_of :company_id, :name, :project_number, :nickname
+ 
+ 
+  def self.search_by_nickname(cia, search)
+     
+     if search  
+          where(company_id: cia, nickname: /^#{search}*/i)      
+     end     
+  end
+
+  def self.search_by_name(cia, search)
+     
+     if search  
+          where(company_id: cia, name: /#{search}*/i)      
+     end     
+  end
+
+  def self.search_by_number(cia, search)
+     
+     if search     
+          where(company_id: cia, project_number: "#{search}") 
+     end     
+  end
+  
 end

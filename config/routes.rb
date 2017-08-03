@@ -5,15 +5,15 @@ Rails.application.routes.draw do
   resources :master_groups
   resources :company_groups
   resources :printing_tickets
+
   resources :companies do
     member do
       get 'verifycompany'
     end
-        
+       
     resources :locations do
       resources :projects
-    end
-    
+    end  
   end
 
   resources :locations
@@ -22,9 +22,9 @@ Rails.application.routes.draw do
 
 #  devise_for :users
   devise_for :users, :controllers => {:registrations => "registrations"}
-  
-  
+    
   mount FullCountrySelect::Engine => '/full_country_select'
+
   root 'main_menus#home'
   
   get 'main_menus/home'

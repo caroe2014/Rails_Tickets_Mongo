@@ -19,7 +19,9 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#"><%= @company_name %></a>
+      <% if ! @company_name.nil? %>
+         <a class="navbar-brand"><%= render @company_name %></a>
+      <% end %>   
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -53,9 +55,9 @@
       </ul>
       <form class="navbar-form navbar-left">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+              <%= render 'projects/projects' %>
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+            
       </form>
       <ul class="nav navbar-nav navbar-right">
         
@@ -89,7 +91,7 @@
 		<% end %>
 
  		<% if user_signed_in? %>       
-            <a class="navbar-brand" href="#">Hi, <strong><%= current_user.email %></strong></a>
+            <a class="navbar-brand" href="#">Hi, <%= current_user.email %></a>
         <% end %>
             
       </ul>

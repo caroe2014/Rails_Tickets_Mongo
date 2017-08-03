@@ -23,7 +23,5 @@ class Company
 #  has_many :users, through: :company_groups 
    
   validates_presence_of :name, :phone
-  
-
-  
+    
 end

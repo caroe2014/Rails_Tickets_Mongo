@@ -8,5 +8,5 @@ class LocalEquipment
   belongs_to :location
   belongs_to :printing_ticket
   
-  index({ name: 1 }, { unique: true, name: "localequipment_index" }) 
+  index({ name: 1 }, { name: "localequipment_index" }) 
 end
