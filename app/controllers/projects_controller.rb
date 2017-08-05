@@ -13,8 +13,6 @@ class ProjectsController < ApplicationController
        if @projects.empty?
            @projects = Project.search_by_number(@company._id, params[:search])
            
-           debugger
-           
        elsif @projects.empty?
             @projects = Project.search_by_name(@company._id, params[:search]) 
            
