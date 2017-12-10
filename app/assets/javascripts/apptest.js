@@ -1,16 +1,16 @@
 ticketApp = angular.module('TicketModule', ['templates', 'ngRoute', 'ngResource', 'ngMessages']);
 
-//ticketApp.config([ '$routeProvider',
-//                 function($routeProvider) {
-//    $routeProvider
+ticketApp.config([ '$routeProvider',
+                 function($routeProvider) {
+    $routeProvider
 //      .when('/', {
 //        templateUrl: "index.html",
 //        controller: 'TicketsCtrl'
 //      })
-//      .when('/tickets/show/:id', {
-//        templateUrl: "show.html",
-//        controller: 'TicketCtrl'
-//      })      
+      .when('/tickets/show/:id', {
+        templateUrl: "show.html",
+        controller: 'TicketCtrl'
+      })      
 //      .when('/tickets/edit/:id', {
 //        templateUrl: "edit.html",
 //        controller: 'TicketCtrl'
@@ -23,7 +23,7 @@ ticketApp = angular.module('TicketModule', ['templates', 'ngRoute', 'ngResource'
 //        templateUrl: "delete.html",
 //        controller: 'TicketCtrl'
 //      })                         
-//}]);
+}]);
 
 ticketApp.controller("itemsControllerHiddenDiv", ["$scope", "$routeParams" ,function($scope, $routeParams) {
     
@@ -50,21 +50,19 @@ ticketApp.controller("ProjectController", ["$scope", "$resource" ,function($scop
 }]);
 
 ticketApp.factory("Ticket", function($location, $routeParams, $resource) {
-
- var str = $location.absUrl();
- var stpro = "/projects/";
- var sttic = "/tickets";
- var com = str.search(stpro);
- var fin = str.search(sttic);
- var lonj = stpro.length;
- var par = str.substring(com+lonj,fin);
   
-  $routeParams.id = par;
+  betweenstrings = function(original,str1,str2) {
+  	var resultstring = original.substring(original.search(str1) + str1.length,
+  		                                 original.search(str2));  		                                 
+  		return resultstring;
+  }
+  
+  $routeParams.id = betweenstrings($location.absUrl(),"/projects/","/tickets");
   
     return $resource("/tickets/index.json", {  }, {
     	
-    index:   { method: 'GET', params: { project_id: $routeParams.id }, isArray: true, responseType: 'json' },
-    update:  { method: 'PUT', responseType: 'json' }
+    index:   { method: 'GET', params: { project_id: $routeParams.id }, isArray: true, responseType: 'json' }
+   
   });
 })
 
@@ -76,7 +74,6 @@ ticketApp.controller("TicketsCtrl", [ "$scope", "$http", "$location", "$resource
     $scope.project = {id:   div.getAttribute("data-project-id"),
                       name: div.getAttribute("data-project-name")                   
                      };
-
 
     $scope.PprojectId = $scope.project.id;
     $routeParams.id = $scope.project.id;
