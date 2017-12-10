@@ -36,21 +36,23 @@
 	  <%= @printing_ticket.double %>
 	</p>
 	
-	<p>
-	  <strong>Material:</strong>
-	  <%= @printing_ticket.local_materials.name %>
-	</p>
 	
 	<p>
 	  <strong>Location:</strong>
 	  <%= @printing_ticket.location.name %>
 	</p>
+
+	<p>
+	  <strong>Material:</strong>
+
+	  <%= LocalMaterial.find_by_id(@printing_ticket.material_id).name %>
+	</p>
 	
 	<p>
 	  <strong>Printer:</strong>
-	  <%= @printing_ticket.local_equipments.name %>
+	  <%= LocalEquipment.find_by_id(@printing_ticket.equipment_id).name %>
 	</p>
-	
-	<%= link_to 'Edit', edit_printing_ticket_path(@printing_ticket), :class => "btn btn-info" %> |
-	<%= link_to 'Back', printing_tickets_path, :class => "btn btn-info" %>
+	<% temp_project_id = @printing_ticket.project_id %>
+	<%= link_to 'Edit', edit_project_printing_ticket_path(temp_project_id, @printing_ticket), :class => "btn btn-info" %> |
+	<%= link_to 'Back', project_printing_tickets_path(temp_project_id), :class => "btn btn-info" %>
 </div>

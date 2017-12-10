@@ -18,7 +18,6 @@ gem 'bson_ext'
 #gem 'mongoid_taggable', '~> 1.1', '>= 1.1.1'
 #gem 'mongoid-random', '~> 0.1.0'
 
-
 gem 'devise', '~> 4.3'
 
 gem 'full_country_select', '~> 0.1.0'
@@ -29,8 +28,16 @@ gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 
 gem 'angularjs-rails', '~> 1.5', '>= 1.5.6'
+gem 'angular-rails-templates', '~> 1.0'
+gem 'angular-ui-router-rails', '~> 0.2.15'
+gem 'bower-rails'
 
-gem 'turbolinks'
+gem 'simple_js_data'
+
+# gem 'turbolinks'
+
+gem 'jquery-turbolinks', '~> 2.1'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -48,10 +55,16 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   gem 'rspec-rails', '~> 3.5'
   gem 'capybara', '~> 2.7.0'
+#  gem 'factory_girl_rails', '~> 4.6'
+  gem 'factory_bot_rails', '~> 4.8', '>= 4.8.2'
   gem 'selenium-webdriver', '~> 3.4', '>= 3.4.1' 
-
+  gem 'teaspoon-jasmine'
+  gem 'poltergeist'
+  gem 'phantomjs', '~> 2.1', '>= 2.1.1.0'
+  gem 'faker'
+#  gem 'spring'
   gem 'debugger'
-# gem 'byebug
+  gem 'database_cleaner'
 end
 
 group :development do

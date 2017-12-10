@@ -43,9 +43,14 @@ class User
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
  
+  def self.full_name
+      first_name + " " + last_name
+  end
+ 
   index({ token_id: 1 }, { unique: true, name: "token_id_index" })    
   
-  has_one :company_groups, :dependent => :destroy 
+  has_one :company_group, :dependent => :destroy
+#  belongs_to :company, :through => :company_groups
   
   
 end

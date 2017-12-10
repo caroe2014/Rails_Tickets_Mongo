@@ -11,25 +11,32 @@ class PrintingTicket
   field :qty, type: Integer, default: 0
   field :single, type: Boolean, default: false
   field :double, type: Boolean, default: false
+  field :started, type: Date
+  field :finished, type: Date
   field :material_id, type: String
   field :equipment_id, type: String
   field :location_id, type: String
   field :project_id, type: String
   field :workflow_state, type: String
+  field :workflow_detail_id, type: String
   
-  index({ name: 1 }, { unique: false, name: "ticketnumber_index" })
+  index({ project_id: 1, name: 1 }, { unique: false, name: "ticketnumber_index" })
   
   belongs_to :project
-  belongs_to :location
-  has_many :local_materials
-  has_many :local_equipments
+  belongs_to :location 
+  belongs_to :local_material
+  belongs_to :local_equipment
   
   def material_idc=(material)
     self.material_id = material
   end
 
   def equipment_idc=(equipo)
-    self.equipment_id = equipo
+      self.equipment_id = equipo
+  end
+ 
+  def self.search_by_project(projectid)    
+      where(project_id: projectid)      
   end
  
 end

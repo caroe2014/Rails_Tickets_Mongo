@@ -1,11 +1,12 @@
 <div class="container">
 	<p id="notice"><%= notice %></p>
 	
-	<h1>Listing Printing Tickets</h1>
-	
+	<h2><%= project_name(@project_id) %></h2>
+
 	<table>
 	  <thead>
 	    <tr>
+	      <th>Location</th>	
 	      <th>Name</th>
 	       <th>Subname</th>
 	      <th>Description</th>
@@ -23,19 +24,18 @@
 	  <tbody>
 	    <% @printing_tickets.each do |printing_ticket| %>
 	      <tr>
-	        <td><%= printing_ticket.name %></td>
-	        <td><%= printing_ticket.subname %></td>
-	        <td><%= printing_ticket.description %></td>
-	        <td><%= printing_ticket.width %></td>
-	        <td><%= printing_ticket.height %></td>
-	        <td><%= printing_ticket.qty %></td>
+	      	<td><%= printing_ticket.location.name %></td>
+	        <td><%= link_to printing_ticket.name, edit_project_printing_ticket_url(@project_id, printing_ticket) %></td>
+	        <td><%= link_to printing_ticket.subname, edit_project_printing_ticket_url(@project_id, printing_ticket) %></td>
+	        <td><%= link_to printing_ticket.description, edit_project_printing_ticket_url(@project_id, printing_ticket) %></td>
+	        <td><%= link_to printing_ticket.width, edit_project_printing_ticket_url(@project_id, printing_ticket) %></td>
+	        <td><%= link_to printing_ticket.height, edit_project_printing_ticket_url(@project_id, printing_ticket) %></td>
+	        <td><%= link_to printing_ticket.qty, edit_project_printing_ticket_url(@project_id, printing_ticket) %></td>
 	        <td><%= printing_ticket.single %></td>
 	        <td><%= printing_ticket.double %></td>
-	        <td><%= printing_ticket.local_materials.name %></td>
-	        <td><%= printing_ticket.local_equipments.name %></td>
-	        <td><%= link_to 'Show', printing_ticket, :class => "btn btn-success" %></td>
-	        <td><%= link_to 'Edit', edit_printing_ticket_path(printing_ticket), :class => "btn btn-warning" %></td>
-	        <td><%= link_to 'Destroy', printing_ticket, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+	        <td><%= LocalMaterial.find_by_id(printing_ticket.material_id).name %></td>
+	        <td><%= LocalEquipment.find_by_id(printing_ticket.equipment_id).name %></td>
+	        <td><%= link_to '-', project_printing_ticket_url(@project_id, printing_ticket), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
 	      </tr>
 	    <% end %>
 	  </tbody>
@@ -43,6 +43,6 @@
 	
 	<br>
 	
-	<%= link_to 'New Printing ticket', new_printing_ticket_path, :class => "btn btn-info" %>
+	<%= link_to '+', new_project_printing_ticket_path(@project_id), :class => "btn btn-info" %>
 	<%= link_to 'Back', projects_path, :class => "btn btn-info" %>
 </div>

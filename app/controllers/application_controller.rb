@@ -8,9 +8,15 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' } 
   respond_to :html, :js, :json
   helper :company_groups
-  
+ 
+  after_action :set_csrf_cookie_for_ng
+ 
+  def set_csrf_cookie_for_ng
+    cookies['XSRF-TOKEN'] = form_authenticity_token if protect_against_forgery?
+  end
+ 
   def verify_logged_in_user
-                               
+                                      
         if ! user_signed_in?
            redirect_to new_user_session_path
         else
@@ -27,17 +33,24 @@ class ApplicationController < ActionController::Base
           session[:mastergroup_id] = @mastergroup._id.to_s  
         
         end
-    
-
   end
   
   def set_company_in_session                
       @company = Company.find( session[:company_id] )
-      @company_name = @company        
+      @company_name = nil
+      @company_name = @company   
   end 
       
   protected
+    
+    def json_request?
+      request.format.json?
+    end
      
+    def verified_request?
+      super || valid_authenticity_token?(session, request.headers['X-XSRF-TOKEN'])
+    end
+ 
     def configure_permitted_parameters
       registration_params = [:firstName, :lastName, :cellphone, :start, :expire, :email, :password, :password_confirmation]
       if params[:action] == 'update'

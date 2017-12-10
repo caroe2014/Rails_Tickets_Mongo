@@ -10,7 +10,7 @@ class Location
   field :address1, type: String
   field :address2, type: String
   
-  index({ shortname: 1 }, { unique: true, name: "shortname_index" })
+  index({ company_id: 1, shortname: 1 }, { unique: true, name: "shortname_index" })
   
   belongs_to :company
   belongs_to :project

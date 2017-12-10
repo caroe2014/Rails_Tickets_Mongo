@@ -1,6 +1,8 @@
 class CompanyGroupsController < ApplicationController
+
+#  before_action :verify_logged_in_user
   before_action :set_company_group, only: [:show, :edit, :update, :destroy]
-  
+  before_action :set_company_in_session  
   
   # GET /company_groups
   # GET /company_groups.json

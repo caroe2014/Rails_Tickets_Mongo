@@ -24,7 +24,7 @@ class Project
   field :ship_date, type: String
   field :project_manager, type: String
   field :paperwork_rcvd_date, type: String 
-  index({ name: 1, nickname: 1 }, { unique: true})
+  index({ company_id: 1, nickname: 1 }, { unique: true, name: "project_index" })
 
   belongs_to :company
   has_many :printing_tickets

@@ -10,8 +10,13 @@ class LocalMaterial
   field :status, type: Integer
   
   belongs_to :location
-  belongs_to :printing_ticket
+  has_many :printing_tickets
  
-  index({ name: 1 }, { unique: true, name: "localmaterial_index" })
+  index({ location_id: 1, name: 1 }, { name: "localmaterial_index", unique: true })
   scope :with_name, ->(name) { where(name: names[name]) }
+  
+  def self.find_by_id(pid)
+      find(pid)
+  end
+  
 end

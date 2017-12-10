@@ -16,5 +16,10 @@ module ApplicationHelper
     local = Location.where( :company_id => pcompany )
     local
   end
-  
+ 
+  def project_name(p)
+      proyecto = Project.find(p)
+      proyecto.name
+  end
+        
 end

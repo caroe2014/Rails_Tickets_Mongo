@@ -1,41 +1,53 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  
+  before_action :verify_logged_in_user
+  before_action :set_project, only: [:edit, :update, :destroy]
   before_action :set_company_in_session
+
 
   # GET /projects
   # GET /projects.json
   def index
-    session[:company_id] = @company._id.to_s
    
     if ! params[:search].nil?            
        @projects = Project.search_by_nickname(@company._id, params[:search]) 
-       debugger
+  
        if @projects.empty?
            @projects = Project.search_by_number(@company._id, params[:search])
            
        elsif @projects.empty?
-            @projects = Project.search_by_name(@company._id, params[:search]) 
-           
-       end  
-         
-    else
-    
+            @projects = Project.search_by_name(@company._id, params[:search])           
+       end           
+    else    
        @projects = Project.where(company_id: session[:company_id])
     end
+    
   end
 
   # GET /projects/1
   # GET /projects/1.json
   def show
+        
+    if params[:project_id].present?
+       @project_id = params[:project_id]
+    elsif params[:id].present?
+      @project_id = params[:id]
+    end    
+
+    @project = Project.find(@project_id)        
+#    respond_with(@project.as_json)
+    render json: @project 
   end
 
   # GET /projects/new
   def new
     @project = Project.new
+   
   end
 
   # GET /projects/1/edit
   def edit
+    
   end
 
   # POST /projects
@@ -82,10 +94,7 @@ class ProjectsController < ApplicationController
   end
 
   private
-  
-    def set_company_in_session
-      @company = Company.find(session[:company_id])
-    end  
+   
     # Use callbacks to share common setup or constraints between actions.
     def set_project
       @project = Project.find(params[:id])

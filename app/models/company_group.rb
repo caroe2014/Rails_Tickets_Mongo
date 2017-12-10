@@ -12,4 +12,12 @@ class CompanyGroup
   belongs_to :master_group
 
   validates_presence_of :company_id, :user_id, :mastergroup_id
+  
+  def self.search_by_user(cia, username)
+      
+       where(company_id: cia, user_id: username)
+   
+  end
+  
+  
 end

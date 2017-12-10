@@ -5,6 +5,11 @@ require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
+# require 'capybara/poltergeist'
+require 'capybara/rspec'
+require 'capybara/rails' # added 11/29/2017
+require 'support/factory_bot'
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -21,6 +26,8 @@ require 'rspec/rails'
 # require only the support files necessary.
 #
 # Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+# Capybara.javascript_driver = :poltergeist
+# Capybara.default_driver    = :poltergeist
 
 RSpec.configure do |config|
   # RSpec Rails can automatically mix in different behaviours to your tests
@@ -36,10 +43,22 @@ RSpec.configure do |config|
   #
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
+  # linea anadida el oct/11/2017
+  config.use_transactional_fixtures = true # modified to true on 11/29/2017
+  config.infer_base_class_for_anonymous_controllers = false # added 11/29/2017
+  config.order = "random"                                   # added 11/29/2017
+#  config.include Rails.application.routes.url.helpers       # added 11/29/2017
   config.infer_spec_type_from_file_location!
 
   # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!
+#  config.generators do |g|
+#    g.factory_bot false
+#    g.factory_bot dir: 'spec/factories'
+#  end
+
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 end
+
+

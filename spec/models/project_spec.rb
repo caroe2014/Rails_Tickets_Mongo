@@ -1,19 +1,28 @@
 require 'rails_helper'
 
 RSpec.describe Project, type: :model do
-  before(:all)do
-    @company = Company.find(1)
-    @project = Project.new(company_id:@company.id, name:"Endocrinology 2017", nickname:"endo2017", number:1000, 
-    client: 1000, phone: "555-666-7777" , estimate: 1000000, 
-    approved_budget: 1500000, accumulated_cost: 1750000)
-  end
+   before(:all) do
+      DatabaseCleaner.start
+#      @company = Company.create!(name: "Testing Company LLC",
+#                                 nickname: "TCLLC",
+#                                 city: "Testing City",
+#                                 state: "Testing State",
+#                                 country: "Testing Country")
 
-  it " la Compania deberia existir en test" do
-    expect(@company.name).to eq("Freeman Decorating LLC")
-  end
+      @company = FactoryBot.create(:company, :name => "Testing Company LLC")
+ 
+      @project = FactoryBot.create(:project, :company_id => @company_id, :nickname => "PT17")
+   end
 
-
-  it " la Compania deberia tener un proyecto" do
-    expect(@project.nickname).to eq("endo2017")
-  end
+   after(:all) do
+       DatabaseCleaner.clean
+   end
+    
+    it "Debe existing una compania" do
+      expect(@company.name).to eq("Testing Company LLC")
+    end
+    it " Debe existe un project " do
+      expect(@project.nickname).to eq("PT17")
+    end
+  
 end

@@ -6,15 +6,20 @@
 //
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // compiled file.
-//
+// require bootstrap/bootstrap
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.turbolinks
 //= require full_country_select/api
-//= require turbolinks
+//= require angular/angular
+//= require angular-route/angular-route
+//= require angular-ui-router
+//= require angular-resource
+//= require angular-messages
+//= require angular-rails-templates
 //= require bootstrap/bootstrap
-//= require angular
+//= require_tree ./templates
 //= require_tree .
-$('.dropdown-toggle').dropdown() 

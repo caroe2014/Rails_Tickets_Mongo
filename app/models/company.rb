@@ -20,8 +20,9 @@ class Company
   has_many :locations, :dependent => :destroy
   has_many :projects
   has_many :company_groups, :dependent => :destroy
+#  has_many :users, :through :company_groups
 #  has_many :users, through: :company_groups 
    
-  validates_presence_of :name, :phone
+  validates_presence_of :name, :phone, :address1, :city, :state, :country, :contact
     
 end

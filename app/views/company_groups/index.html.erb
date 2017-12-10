@@ -18,14 +18,14 @@
       <tr>
            <% company = Company.find(company_group.company_id) %>     	
         <td><%= company.name %></td>
-            <% user = User.company_group.user_id %>
-        <td><%= user.name %></td>
+            <% user = User.find(company_group.user_id.to_s) %>
+        <td><%= user.first_name %></td>
             <%  master = MasterGroup.find(company_group.mastergroup_id) %>
         <td><%= master.name %></td>
         <td><%= company_group.status %></td>
-        <td><%= link_to 'Show', company_group %></td>
-        <td><%= link_to 'Edit', edit_company_group_path(company_group) %></td>
-        <td><%= link_to 'Destroy', company_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', company_group, :class => "btn btn-success" %></td>
+        <td><%= link_to 'Edit', edit_company_group_path(company_group), :class => "btn btn-warning"  %></td>
+        <td><%= link_to 'Destroy', company_group, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -33,4 +33,4 @@
 
 <br>
 
-<%= link_to 'New Company group', new_company_group_path %>
+<%= link_to 'New Company group', new_company_group_path, :class => "btn btn-info" %>

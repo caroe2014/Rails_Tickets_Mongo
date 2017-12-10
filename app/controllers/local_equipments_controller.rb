@@ -1,13 +1,12 @@
 class LocalEquipmentsController < ApplicationController
+
+  before_action :verify_logged_in_user
   before_action :set_local_equipment, only: [:show, :edit, :update, :destroy]
   before_action :set_company_in_session
   
   # GET /local_equipments
   # GET /local_equipments.json
   def index
-    @company = Company.where( { :name => 'Freeman Decorating Inc' } ).first
-       
-    session[:company_id] = @company._id.to_s
     
     @local_equipments = LocalEquipment.all
   end

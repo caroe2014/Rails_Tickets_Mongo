@@ -1,7 +1,9 @@
 <div class="container">
-	<h1>New Printing Ticket</h1>
+	
+	<h2>New Ticket for: <%= project_name(@project_id) %></h2>
 	
 	<%= render 'form' %>
 	
-	<%= link_to 'Back', printing_tickets_path, :class => "btn btn-info" %>
+	<%= link_to 'Back', printing_tickets_path(@project_id), :class => "btn btn-info" %>
+	<input id="project_id" type="hidden" value="<%= params[:project_id] %>" />
 </div>

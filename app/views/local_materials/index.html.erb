@@ -7,7 +7,7 @@
 	  <thead>
 	    <tr>
 
-	      <th>Location</th>
+		  <th>Location</th>	
 	      <th>Name</th>
 	      <th>Quantity</th>
 	      <th>Status</th>
@@ -18,7 +18,7 @@
 	  <tbody>
 	    <% @local_materials.each do |local_material| %>
 	      <tr>		 
-		        <td><%= local_material.location.name %></td>
+                <td><%= local_material.location.name %></td>  
 		        <td><%= local_material.name %></td>
 		        <td><%= local_material.quantity %></td>
 		        <td><%= local_material.status %></td>
@@ -33,4 +33,5 @@
 	<br>
 	
 	<%= link_to 'New Local material', new_local_material_path, :class => "btn btn-info" %>
+	<%= link_to 'Back', root_path, :class => "btn btn-info" %>
 </div>

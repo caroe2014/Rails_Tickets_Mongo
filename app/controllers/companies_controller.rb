@@ -1,6 +1,6 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy, :verifycompany]
-  before_action :set_company_in_session
+  before_action :set_company_in_session, only: [:show, :new, :edit, :update, :verifycompany]
 
   # GET /companies
   # GET /companies.json

@@ -1,2 +1,6 @@
-
-<%= @company.name %> 
+<%  if ! session[:company_id].blank? %>
+<%     @company_name = Company.find( session[:company_id] ) %>
+<%=    @company_name.name %>
+<%  else %>
+<%     "Your Company Name" %> 
+<%  end %>

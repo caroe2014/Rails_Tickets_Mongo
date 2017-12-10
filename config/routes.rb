@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
 
+  get 'tickets/index'
+#  get 'tickets/create'
+#  get 'tickets/destroy'
+
+  get "projects_show", to: "projects#show"  
+
+  resources :workflow_details
+  resources :workflow_masters
+  resources :job_states
   resources :local_equipments
   resources :local_materials
   resources :master_groups
@@ -13,30 +22,32 @@ Rails.application.routes.draw do
        
     resources :locations do
       resources :projects
+
     end  
   end
 
-  resources :locations
-  resources :projects
+  resources :locations do
+    resources :printing_tickets
+    
+  end
 
+  resources :projects do
+    resources :printing_tickets
+    resources :tickets
+  end
 
-#  devise_for :users
   devise_for :users, :controllers => {:registrations => "registrations"}
     
   mount FullCountrySelect::Engine => '/full_country_select'
 
-  root 'main_menus#home'
-  
+  root 'main_menus#home' 
+
   get 'main_menus/home'
-
   get 'main_menus/login'
-
   get 'main_menus/logout'
-
   get 'main_menus/report'
-
   get 'main_menus/profile'
-  
+ 
   get 'users/:company_id/sign_up' => 'devise/registrations#new', as: :admin_user_registration
 
   # The priority is based upon order of creation: first created -> highest priority.

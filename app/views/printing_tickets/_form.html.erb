@@ -1,4 +1,6 @@
 <%= form_for(@printing_ticket) do |f| %>
+<% @printing_ticket.project_id = @project_id %>
+
   <% if @printing_ticket.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@printing_ticket.errors.count, "error") %> prohibited this printing_ticket from being saved:</h2>
@@ -52,7 +54,10 @@
         <%= f.radio_button :double, false, :checked => true %>
   </div>   
   
-
+  <div class="field">
+    <%= f.hidden_field :project_id %>
+  </div>
+  
    <div class="field">  
   	 <%= f.label :location_id, "Location" %>
     

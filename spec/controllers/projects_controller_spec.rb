@@ -29,11 +29,25 @@ RSpec.describe ProjectsController, type: :controller do
   # Project. As you add validations to Project, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { "name" => "Proyecto de Prueba",
+      "nickname" => "PP17",
+      "project_number" => 12345,
+      "client" => "Acme",
+      "phone" => "555-666-7777",
+      "estimate" => 100000,
+      "project_manager" =>"Persona de Proyecto"
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { "name" => "",
+      "nickname" => "",
+      "project_number" => 0,
+      "client" => "",
+      "phone" => "",
+      "estimate" => 0,
+      "project_manager" =>""
+    }
   }
 
   # This should return the minimal set of values that should be in the session

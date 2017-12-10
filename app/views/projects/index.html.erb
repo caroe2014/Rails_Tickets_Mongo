@@ -1,11 +1,12 @@
-	<p id="notice"><%= notice %></p>
+<p id="notice"><%= notice %></p>
 	
 <div class="container">
 	<h3>Listing Projects</h3>
 	
-	<table>
+	<table ng-controller="itemsControllerHiddenDiv">
 	  <thead>
 	    <tr>
+	      <th>&nbsp;</th>
 	      <th>Name</th>
 	      <th>Nickname</th>
 	      <th>P.Number</th>
@@ -15,24 +16,24 @@
 	  </thead>
 	
 	  <tbody>
+	 
 	    <% @projects.each do |project| %>
-	      <tr>
-	        <td><%= project.name %></td>
+	      <tr>    	
+	        <td><%= link_to project.name, edit_project_path(project) %></td>
 	        <td><%= project.nickname %></td>
 	        <td><%= project.project_number %></td>
 	        <td><%= project.status %></td>
-	        <td><%= link_to 'Show', project, :class => "btn btn-success" %></td>
-	        <td><%= link_to 'Edit', edit_project_path(project), :class => "btn btn-warning" %></td>
-	        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
-	        <td><%= link_to 'New Tickets', new_printing_ticket_path, :project_id => project._id, :class => "btn btn-info" %></td>
-	        <td><%= link_to 'List Tickets', printing_tickets_path, :project_id => project._id, :class => "btn btn-info" %></td>
+	        <td><%= link_to '-', project, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+	        <td><%= link_to 'List Tickets', project_tickets_path(project), data: {project_id: project } , :class => "btn btn-info" %></td>
+	        <td><%= link_to 'List PTickets', project_printing_tickets_path(project), data: {project_id: project }, :class => "btn btn-success" %></td>
 	      </tr>
 	    <% end %>
 	  </tbody>
 	</table>
 	
 	<br>
-	
-	<%= link_to 'New Project', new_project_path, :class => "btn btn-info" %>
-	<%= link_to 'Back', main_menus_home_path, :class => "btn btn-info" %>
+
+	<%= link_to 'Back', main_menus_home_path, :class => "btn btn-info" %>	
+	<%= link_to '+', new_project_path, :class => "btn btn-info" %>
+
 </div>
