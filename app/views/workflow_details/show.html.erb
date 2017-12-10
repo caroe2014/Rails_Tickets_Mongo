@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @workflow_detail.company_id %>
+</p>
+
+<p>
+  <strong>Workflow master:</strong>
+  <%= @workflow_detail.workflow_master_id %>
+</p>
+
+<p>
+  <strong>Next:</strong>
+  <%= @workflow_detail.next %>
+</p>
+
+<p>
+  <strong>Previous:</strong>
+  <%= @workflow_detail.previous %>
+</p>
+
+<%= link_to 'Edit', edit_workflow_detail_path(@workflow_detail) %> |
+<%= link_to 'Back', workflow_details_path %>
