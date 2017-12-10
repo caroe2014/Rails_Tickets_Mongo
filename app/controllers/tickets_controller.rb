@@ -9,9 +9,7 @@ class TicketsController < ApplicationController
                   elsif params[:id].present?
                      params[:id]
                   end   
-    puts "*********************************" 
-    puts params    
-    puts "*********************************"
+
     @tickets = PrintingTicket.where(project_id: @project_id)
          
     respond_to do |format|

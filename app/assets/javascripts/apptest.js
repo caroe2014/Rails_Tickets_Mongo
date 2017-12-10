@@ -59,11 +59,8 @@ ticketApp.factory("Ticket", function($location, $routeParams, $resource) {
  var lonj = stpro.length;
  var par = str.substring(com+lonj,fin);
   
-  alert("par: " + par);
   $routeParams.id = par;
   
-
-//  return $resource("/tickets/index.json", { project_id: "@Id" }, {
     return $resource("/tickets/index.json", {  }, {
     	
     index:   { method: 'GET', params: { project_id: $routeParams.id }, isArray: true, responseType: 'json' },

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   get 'tickets/index'
-#  get 'tickets/create'
+  get 'tickets/create'
 #  get 'tickets/destroy'
 
   get "projects_show", to: "projects#show"  
