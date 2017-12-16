@@ -59,6 +59,9 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    capybara-screenshot (1.0.18)
+      capybara (>= 1.0, < 3)
+      launchy
     childprocess (0.8.0)
       ffi (~> 1.0, >= 1.0.11)
     city-state (0.0.13)
@@ -115,6 +118,8 @@ GEM
       railties (>= 3.1.0)
       turbolinks
     json (1.8.6)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.5)
@@ -255,6 +260,7 @@ DEPENDENCIES
   bower-rails
   bson_ext
   capybara (~> 2.7.0)
+  capybara-screenshot
   coffee-rails (~> 4.2.1)
   database_cleaner
   debugger

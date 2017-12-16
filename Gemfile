@@ -75,3 +75,5 @@ group :development do
   gem 'spring'
 end
 
+gem 'capybara-screenshot', :group => :test
+

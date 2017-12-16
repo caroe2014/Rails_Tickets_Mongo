@@ -6,5 +6,7 @@ class MasterGroup
   field :level, type: Integer
   field :status, type: Integer
   
+  validates_presence_of :name
+  
   has_many :company_groups, :dependent => :destroy
 end

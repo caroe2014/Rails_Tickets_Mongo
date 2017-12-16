@@ -66,17 +66,19 @@ ticketApp.factory("Ticket", function($location, $routeParams, $resource) {
   });
 })
 
-ticketApp.controller("TicketsCtrl", [ "$scope", "$http", "$location", "$resource", "$routeParams", "Ticket", 
-                                function ($scope, $http, $location, $resource, $routeParams, Ticket) {
+ticketApp.controller("TicketsCtrl", [ "$scope", "$location", "$resource", "$routeParams", "Ticket", 
+                                function ($scope, $location, $resource, $routeParams, Ticket) {
 
     var div = document.getElementById('div-project-data');
     
     $scope.project = {id:   div.getAttribute("data-project-id"),
                       name: div.getAttribute("data-project-name")                   
                      };
-
+    
     $scope.PprojectId = $scope.project.id;
     $routeParams.id = $scope.project.id;
+   
+    console.log(Ticket.index());
    
     $scope.tickets = Ticket.index();                                                
 

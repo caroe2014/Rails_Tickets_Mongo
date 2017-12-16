@@ -8,6 +8,8 @@ require 'rspec/rails'
 # require 'capybara/poltergeist'
 require 'capybara/rspec'
 require 'capybara/rails' # added 11/29/2017
+require 'capybara/poltergeist'
+require 'capybara-screenshot/rspec'
 require 'support/factory_bot'
 
 # Add additional requires below this line. Rails is not loaded until this point!
@@ -26,8 +28,8 @@ require 'support/factory_bot'
 # require only the support files necessary.
 #
 # Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
-# Capybara.javascript_driver = :poltergeist
-# Capybara.default_driver    = :poltergeist
+  Capybara.javascript_driver = :rack_test
+  Capybara.default_driver    = :rack_test
 
 RSpec.configure do |config|
   # RSpec Rails can automatically mix in different behaviours to your tests

@@ -1,7 +1,7 @@
-require "rails_helper"
-require "spec_helper"
+require 'rails_helper'
 
-feature "verifying ticket controller", js: true do
+
+RSpec.describe Project, type: :model do
    before(:all) do
       DatabaseCleaner.start
       
@@ -27,16 +27,7 @@ feature "verifying ticket controller", js: true do
                     nickname: "PT17",
                     project_number: 12345,
                     status: 1,
-                    client: "Testing Looser LLC",
-                    phone: "555-666-9999",
-                    project_manager: "testing Person")
-
-     @project2 = Project.create!(name: "Project testing 2018",
-                    company_id: @company._id,
-                    nickname: "PT18",
-                    project_number: 12345,
-                    status: 1,
-                    client: "Testing Looser LLC",
+                    client: "Testing Company LLC",
                     phone: "555-666-9999",
                     project_manager: "testing Person")
 
@@ -50,17 +41,6 @@ feature "verifying ticket controller", js: true do
                                                double: false,
                                                project_id: @project._id)
 
-     @printing_ticket2 = PrintingTicket.create!(name: "WT10600",
-                                               subname: "LI10600",
-                                               description: "GROMMETS ALL 4 SIDES",
-                                               width: 96.0,
-                                               height: 120.0,
-                                               qty: 10,
-                                               single: true,
-                                               double: false,
-                                               project_id: @project2._id)
-
-
      @master_group = MasterGroup.create!(name: "admin",
                                          status: 1)
 
@@ -69,40 +49,26 @@ feature "verifying ticket controller", js: true do
                                             mastergroup_id: @master_group._id)                                                                           
 
    end
-   
-   before(:each) do
-     visit "/main_menus/home"
-   end
 
    after(:all) do
        DatabaseCleaner.clean
    end
-
-  scenario "check login" do    
    
-    expect(page).to have_content("Log in")
-    expect(page).to have_content("Email")
-    expect(page).to have_content("Password")
-    
-    fill_in "Email", with: "edwin.caro@freemanco.com"
-    fill_in "Password", with: "1dv1vvdu"
-    click_button 'Log in'
-
-    expect(page).to have_content("Signed in successfully")
-  end
+    it "debe existir un usuario" do
+       expect(@user.first_name).to eq("Edwin")
+    end
+      
+    it "Debe existir una compania" do
+      expect(@company.name).to eq("Testing Company LLC")
+    end
+    it " Debe existe un project " do
+      expect(@project.nickname).to eq("PT17")
+    end
+    it "debe existir un work ticket" do
+      expect(@printing_ticket.name).to eq("WT10500")
+    end
+    it "debe existir un masterGroup" do
+      expect(@master_group.name).to eq("admin")
+    end
   
-  scenario "Check header" do
-    visit "/main_menus/home"
-    fill_in "Email", with: "edwin.caro@freemanco.com"
-    fill_in "Password", with: "1dv1vvdu"
-    click_button 'Log in'
-    visit projects_path
-    expect(page).to have_content("PT17   12345")
-    expect(page).to have_content("Testing Company LLC")
-    expect(page).to have_content("edwin.caro@freemanco.com")
-    
-    click_link('List Tickets')
-    expect(page).to have_content("WT10500")
-  end
-    
 end
