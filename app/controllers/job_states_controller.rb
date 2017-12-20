@@ -28,6 +28,7 @@ class JobStatesController < ApplicationController
 
     respond_to do |format|
       if @job_state.save
+#        format.html { redirect_to @job_state, notice: 'Job state was successfully created.' }
         format.html { redirect_to @job_state, notice: 'Job state was successfully created.' }
         format.json { render :show, status: :created, location: @job_state }
       else
@@ -43,7 +44,7 @@ class JobStatesController < ApplicationController
     respond_to do |format|
       if @job_state.update(job_state_params)
         format.html { redirect_to @job_state, notice: 'Job state was successfully updated.' }
-        format.json { render :show, status: :ok, location: @job_state }
+        format.json { render :index, status: :ok, location: @job_state }
       else
         format.html { render :edit }
         format.json { render json: @job_state.errors, status: :unprocessable_entity }
@@ -69,6 +70,6 @@ class JobStatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_state_params
-      params.require(:job_state).permit(:step_number, :name, :status)
+      params.require(:job_state).permit(:step_number, :name, :color, :status)
     end
 end

@@ -31,6 +31,7 @@ gem 'angularjs-rails', '~> 1.5', '>= 1.5.6'
 gem 'angular-rails-templates', '~> 1.0'
 gem 'angular-ui-router-rails', '~> 0.2.15'
 gem 'bower-rails'
+gem 'kaminari-mongoid', '~> 1.0', '>= 1.0.1'
 
 gem 'simple_js_data'
 

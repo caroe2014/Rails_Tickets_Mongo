@@ -17,6 +17,7 @@ class PrintingTicket
   field :equipment_id, type: String
   field :location_id, type: String
   field :project_id, type: String
+  field :job_state_id, type: String
   field :workflow_state, type: String
   field :workflow_detail_id, type: String
   
@@ -26,6 +27,7 @@ class PrintingTicket
   belongs_to :location 
   belongs_to :local_material
   belongs_to :local_equipment
+  belongs_to :job_state
   
   def material_idc=(material)
     self.material_id = material

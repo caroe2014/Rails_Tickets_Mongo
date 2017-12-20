@@ -2,7 +2,8 @@
 	<h1>Editing Printing Ticket</h1>
 	
 	<%= render 'form' %>
-	
-	<%= link_to 'Show', @printing_ticket, :class => "btn btn-info" %> |
-	<%= link_to 'Back', printing_tickets_path, :class => "btn btn-info" %>
+	                   
+	<%= link_to 'Show', project_printing_ticket_url(params[:project_id], @printing_ticket), :class => "btn btn-info" %> |
+
+	<%= link_to 'Back', project_printing_tickets_path(params[:project_id]), :class => "btn btn-info" %>
 </div>

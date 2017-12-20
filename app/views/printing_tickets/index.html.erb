@@ -1,14 +1,15 @@
 <div class="container">
-	<p id="notice"><%= notice %></p>
-	
-	<h2><%= project_name(@project_id) %></h2>
 
-	<table>
-	  <thead>
+	
+	<h3><%= project_name(@project_id) %></h3>
+
+	<table class= "panel panel-defaut">
+	  <thead class= "navbar navbar-inverse" data-spy="affix" data-offset-top="135">
 	    <tr>
+	      <th>Status</th>	
 	      <th>Location</th>	
 	      <th>Name</th>
-	       <th>Subname</th>
+          <th>Subname</th>
 	      <th>Description</th>
 	      <th>Width</th>
 	      <th>Height</th>
@@ -21,23 +22,42 @@
 	    </tr>
 	  </thead>
 	
-	  <tbody>
-	    <% @printing_tickets.each do |printing_ticket| %>
-	      <tr>
-	      	<td><%= printing_ticket.location.name %></td>
-	        <td><%= link_to printing_ticket.name, edit_project_printing_ticket_url(@project_id, printing_ticket) %></td>
-	        <td><%= link_to printing_ticket.subname, edit_project_printing_ticket_url(@project_id, printing_ticket) %></td>
-	        <td><%= link_to printing_ticket.description, edit_project_printing_ticket_url(@project_id, printing_ticket) %></td>
-	        <td><%= link_to printing_ticket.width, edit_project_printing_ticket_url(@project_id, printing_ticket) %></td>
-	        <td><%= link_to printing_ticket.height, edit_project_printing_ticket_url(@project_id, printing_ticket) %></td>
-	        <td><%= link_to printing_ticket.qty, edit_project_printing_ticket_url(@project_id, printing_ticket) %></td>
-	        <td><%= printing_ticket.single %></td>
-	        <td><%= printing_ticket.double %></td>
-	        <td><%= LocalMaterial.find_by_id(printing_ticket.material_id).name %></td>
-	        <td><%= LocalEquipment.find_by_id(printing_ticket.equipment_id).name %></td>
-	        <td><%= link_to '-', project_printing_ticket_url(@project_id, printing_ticket), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
-	      </tr>
-	    <% end %>
+	  <tbody class= "panel-body">
+		
+	   
+	  	<% if @printing_tickets.present? %>
+		    <% @printing_tickets.each do |printing_ticket| %>
+		      <tr> 
+	            <% if printing_ticket.present? %>          		      
+		   		   <td class = "<%= JobState.where(_id: printing_ticket.job_state_id).first.color %> "><%= JobState.where(_id: printing_ticket.job_state_id).first.name %></td>
+		        <% else %>
+		           <td>No Status Linked</td>
+		        <% end %>
+		        		   		  
+		      	<td><%= link_to printing_ticket.location.name, edit_project_printing_ticket_url(@project_id, printing_ticket) %></td>
+		        <td><%= link_to printing_ticket.name, edit_project_printing_ticket_url(@project_id, printing_ticket) %></td>
+		        <td><%= link_to printing_ticket.subname, edit_project_printing_ticket_url(@project_id, printing_ticket) %></td>
+		        <td><%= link_to printing_ticket.description, edit_project_printing_ticket_url(@project_id, printing_ticket) %></td>
+		        <td><%= link_to printing_ticket.width, edit_project_printing_ticket_url(@project_id, printing_ticket) %></td>
+		        <td><%= link_to printing_ticket.height, edit_project_printing_ticket_url(@project_id, printing_ticket) %></td>
+		        <td><%= link_to printing_ticket.qty, edit_project_printing_ticket_url(@project_id, printing_ticket) %></td>
+		        <td><%= printing_ticket.single %></td>
+		        <td><%= printing_ticket.double %></td>
+		        <% if !printing_ticket.material_id.nil? %>
+		           <td><%= LocalMaterial.find_by_id(printing_ticket.material_id).name %></td>
+		        <% else %>
+		           <td><%= printing_ticket.local_material.name %> </td>
+		        <% end %>
+		        <% if !printing_ticket.equipment_id.nil? %>
+		           <td><%= LocalEquipment.find_by_id(printing_ticket.equipment_id).name %></td>
+		        <% else %>
+		           <td>No Equipment Linked</td>
+		        <% end %>		           
+		           
+		        <td><%= link_to '-' , project_printing_ticket_url(@project_id, printing_ticket), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+		      </tr>
+		    <% end %>
+		 <% end %>   
 	  </tbody>
 	</table>
 	

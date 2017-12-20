@@ -1,22 +1,11 @@
 <div class="container">
-   <% if notice.present? %>
-	   <aside class="alert alert-info">
-	   	   <%= notice %>
-	   </aside>
-   <% end %>	   
-   <% if alert.present? %>
-	   <aside class="alert alert-danger">
-	   	   <%= alert %>
-	   </aside>
-   <% end %>
+ 
    	
-	<nav class="navbar navbar-default">
+	<nav class="navbar navbar-default" >
 	  
 	    <!-- Brand and toggle get grouped for better mobile display -->
 	    <div class="navbar-header">
 	
-	
-	      
 	      
 	         <a class="navbar-brand"><%= render 'companies/company' %></a>
 	                  
@@ -97,5 +86,14 @@
 	    </div><!-- /.navbar-collapse -->
 	 
 	</nav>
-
+	  <% if notice.present? %>
+		
+		   	   <%= notice %>
+		  
+	   <% end %>	   
+	   <% if alert.present? %>
+		
+		   	   <%= alert %>
+	
+	   <% end %>
  </div><!-- /.container-fluid -->

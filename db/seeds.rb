@@ -6,29 +6,36 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 Company.each do |cia|
-  locations = Location.where( { :company_id => @company._id }
-  locations.each do |loc|
-    PrintingTicket.create!(
-    10.times do |i|
-       s_ds = rand(0..1)
-       valor = false
-       if (s_ds == 1)
-         valor = true
-       end  
+  Project.where(company_id: cia._id).each do |project|
+    js = JobState.first()
+    js_s = js._id.to_s
+    Location.where(company_id: cia._id ).each do |loc|
+    lm = LocalMaterial.where(location_id: loc._id).first
+    le = LocalEquipment.where(location_id: loc._id).first
        
-       name: "WT" + #{Faker::Number},
-       subname: "LI" +#{Faker::Number} + i.to_s,
-       description: "P T/B"
-       width: rand(40..1022).to_s
-       height: rand(48..280).to_s
-       qty: rand(1..22).to_s
-       single: valor
-       double: !valor
-       
+    JobState.each do |js|
+      5.times do |i|     
+        js_s = js._id.to_s
+        fn = Faker::Number.number    
+        PrintingTicket.create!(name: "WT" + fn.to_s,
+                               subname: "LI" + fn.to_s + i.to_s,
+                               description: "P T/B",
+                               width: rand(40..360).to_s,
+                               height: rand(48..150).to_s,
+                               qty: rand(1..20).to_s,
+                               single: true,
+                               double: false,
+                               local_material_id: lm._id.to_s,
+                               local_equipment_id: le._id.to_s,
+                               location_id: loc._id,
+                               project_id: project._id,
+                               job_state_id: js_s
+                               )
+                          
+        end
+      end  
     end
-    )
-    
-  end  
+  end    
 end
 
 

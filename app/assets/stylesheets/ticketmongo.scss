@@ -1,49 +1,90 @@
 body {
 
-    width:        90%;
+width:        90%;
 
-  h3 {
-    padding-top: 0px;  
-  }
+h3 {
+  padding-top: 0px;  
+}
+
+.white { background: #FFFFFF;
+         color: #000000;                   
+       }
+.blue { background: #1F5EC4;           
+       } 
+.red { background: #C41F38;          
+       }
+.green { background: #1FC492;           
+       }
+.pink { background: #E8A7A7;
+         color: #000000;           
+       }
+.yellow { background: #4CB11F;
+         color: #000000;           
+       }
+.brown { background: #563110;           
+       }
+.purple { background: #2F1FC4;           
+       }
+.ltblue { background: #73ADBC;           
+       }
+.ltpurple { background: #C1A7E8;           
+       }                                                              
+.orangle { background: #C45B1F;
+         color: #000000;           
+       }
+.ltorangle { background: #FCB271;
+         color: #000000;           
+       }         
+.ninguno { color: none; }
+ 
+.affix {
+  top: 0;
+  width: 100%;
+  z-index: 9999 !important;
+}
+
+.affix + .container {
+    padding-top: 40px;
+}
 
 
-  table tbody tr td {
-    padding-left: 10px;
-  }
+table tbody tr td {
+  padding-left: 10px;
+}
   
-  table thead tr th {
-    padding-left: 10px;
-  }
+table thead tr th {
+  padding-left: 10px;
+}
   
-  .actions {
-    margin-top:  10px;
-    padding-top: 10px;  
-  }
+.actions {
+  margin-top:  10px;
+  padding-top: 10px;  
+}
   
-  .fields {
-    margin: 10px;
-  }
+.fields {
+  margin: 10px;
+}
   
-  div select {
-    color: #272b30;
-  }
+div select {
+  color: #272b30;
+}
 
-  tbody tr {    
-    margin-top: 30px;
-  }
+tbody tr {    
+  margin-top: 30px;
+}
   
-  a .navbar-brand {
-    font: bold smaller sans-serif;
-  }
+a .navbar-brand {
+  font: bold smaller sans-serif;
+}
   
-  .col-xs-2 {
-    padding-right: 3px;
-    padding-left: 3px;
-  }
-  .col-xs-1 {
-    padding-right: 3px;
-    padding-left: 3px;
-  }
+.col-xs-2 {
+  padding-right: 3px;
+  padding-left: 3px;
+}
+.col-xs-1 {
+  padding-right: 3px;
+  padding-left: 3px;
+}
 
 
 }

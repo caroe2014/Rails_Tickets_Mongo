@@ -7,9 +7,9 @@ class PrintingTicketsController < ApplicationController
   # GET /printing_tickets
   # GET /printing_tickets.json
   def index
-   
-    @printing_tickets = PrintingTicket.where(project_id: @project_id)
-   
+    
+    @printing_tickets = PrintingTicket.where(project_id: @project_id).order_by(:location_id => 'asc').order_by(:created_at => 'desc')
+#    session[:project_id] = @project_id
   end
 
   # GET /printing_tickets/1
@@ -27,6 +27,7 @@ class PrintingTicketsController < ApplicationController
   # GET /printing_tickets/1/edit
   def edit
     fillup_company_name
+    
   end
 
   # POST /printing_tickets
@@ -41,10 +42,10 @@ class PrintingTicketsController < ApplicationController
 #    @printing_ticket.equipment_id = equipment
         
     respond_to do |format|
-
+      @project_id = @printing_ticket.project_id
       if @printing_ticket.save
-        format.html { redirect_to @printing_ticket, notice: 'Printing ticket was successfully created.' }
-        format.json { render :show, status: :created, location: @printing_ticket }
+        format.html { redirect_to project_printing_tickets_url(@project_id), notice: 'Printing ticket was successfully created.' }
+        format.json { render :index, status: :created, location: @printing_ticket }
       else
         format.html { render :new }
         format.json { render json: @printing_ticket.errors, status: :unprocessable_entity }
@@ -55,9 +56,10 @@ class PrintingTicketsController < ApplicationController
   # PATCH/PUT /printing_tickets/1
   # PATCH/PUT /printing_tickets/1.json
   def update
+    @project_id = @printing_ticket.project_id    
     respond_to do |format|
       if @printing_ticket.update(printing_ticket_params)
-        format.html { redirect_to @printing_ticket, notice: 'Printing ticket was successfully updated.' }
+        format.html { redirect_to project_printing_tickets_url(@project_id), notice: 'Printing ticket was successfully updated.' }
         format.json { render :show, status: :ok, location: @printing_ticket }
       else
         format.html { render :edit }
@@ -69,9 +71,10 @@ class PrintingTicketsController < ApplicationController
   # DELETE /printing_tickets/1
   # DELETE /printing_tickets/1.json
   def destroy
+    @project_id = @printing_ticket.project_id
     @printing_ticket.destroy
     respond_to do |format|
-      format.html { redirect_to printing_tickets_url, notice: 'Printing ticket was successfully destroyed.' }
+      format.html { redirect_to project_printing_tickets_url(@project_id) , notice: 'Printing ticket was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -93,7 +96,7 @@ class PrintingTicketsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def printing_ticket_params
-      params.require(:printing_ticket).permit(:name, :subname, :description, :width, :height, :qty, :single, :double, :material_id, :equipment_id, :project_id, :material_idc, :location_id)
+      params.require(:printing_ticket).permit(:name, :subname, :description, :width, :height, :qty, :single, :double, :material_id, :equipment_id, :project_id, :job_state_id, :material_idc, :location_id)
     end
     
     def set_project_from_params

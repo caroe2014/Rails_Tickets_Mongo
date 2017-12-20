@@ -54,5 +54,5 @@
 	</p>
 	<% temp_project_id = @printing_ticket.project_id %>
 	<%= link_to 'Edit', edit_project_printing_ticket_path(temp_project_id, @printing_ticket), :class => "btn btn-info" %> |
-	<%= link_to 'Back', project_printing_tickets_path(temp_project_id), :class => "btn btn-info" %>
+	<%= link_to 'Back', project_printing_tickets_path(params[:project_id]), :class => "btn btn-info" %>
 </div>

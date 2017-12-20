@@ -16,6 +16,11 @@ module ApplicationHelper
     local = Location.where( :company_id => pcompany )
     local
   end
+
+  def set_one_state_from_company(pnumber)
+    jobstate = JobState.where( :status => pnumber )
+    jobstate
+  end
  
   def project_name(p)
       proyecto = Project.find(p)

@@ -1,13 +1,28 @@
 <%= simple_form_for(@job_state) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :step_number %>
-    <%= f.input :name %>
-    <%= f.input :status %>
+  <div class="form-inputs row">
+	  <div class="form-group col-sm-2">
+	   	<%= f.input :step_number %>
+	  </div> 
+ </div>
+ <div class="row">	  
+	  <div class="form-group col-sm-4">   
+	   	<%= f.input :name %>
+	  </div> 
+ </div>
+ <div class="row">	  
+	  <div class="form-group col-sm-2"> 
+	   	<%= f.input :status %>
+	  </div> 
+ </div>
+ <div class="row">
+	  <div class="form-group col-sm-4"> 
+	    <%= f.input :color %>
+	  </div>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, :class => "btn btn-info" %>
   </div>
 <% end %>

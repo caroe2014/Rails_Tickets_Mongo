@@ -24,8 +24,8 @@
 	        <td><%= project.project_number %></td>
 	        <td><%= project.status %></td>
 	        <td><%= link_to '-', project, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
-	        <td><%= link_to 'List Tickets', project_tickets_path(project), data: {project_id: project } , :class => "btn btn-info" %></td>
-	        <td><%= link_to 'List PTickets', project_printing_tickets_path(project), data: {project_id: project }, :class => "btn btn-success" %></td>
+	        <td><%= link_to 'List Angular Tickets', project_tickets_path(project), data: {project_id: project } , :class => "btn btn-info" %></td>
+	        <td><%= link_to 'List Rails Tickets', project_printing_tickets_path(project), data: {project_id: project }, :class => "btn btn-success" %></td>
 	      </tr>
 	    <% end %>
 	  </tbody>

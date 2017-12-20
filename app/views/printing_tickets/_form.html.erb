@@ -13,32 +13,38 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :subname, "Line Item" %><br>
-    <%= f.text_field :subname %>
-  </div>  
-  <div class="field">
-    <%= f.label :description, "Comments" %><br>
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
+  <div class="row">
+	  <div class="field form-group col-sm-3">
+	    <%= f.label :name %><br>
+	    <%= f.text_field :name %>
+	  </div>
+  </div> 	  
+  <div class="row">
+	  <div class="field form-group col-sm-3">
+	    <%= f.label :subname, "Line Item" %><br>
+	    <%= f.text_field :subname %>
+	  </div> 
+  </div> 	  
+  <div class="row">	   
+	  <div class="field form-group col-sm-3">
+	    <%= f.label :description, "Comments" %><br>
+	    <%= f.text_field :description %>
+	  </div>
+  </div>	  
+  <div class="field form-group">
     <%= f.label :width %><br>
     <%= f.text_field :width %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :height %><br>
     <%= f.text_field :height %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :qty %><br>
     <%= f.text_field :qty %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :single %><br />
     <%= f.label :single, "Yes", :value => "true"  %>
     <%= f.radio_button :single, true, :checked => true %>
@@ -46,7 +52,7 @@
     <%= f.radio_button :single, false%>
   </div>
   
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :double %><br />
         <%= f.label :double, "Yes", :value => "true"  %>
         <%= f.radio_button :double, true %>
@@ -54,22 +60,30 @@
         <%= f.radio_button :double, false, :checked => true %>
   </div>   
   
-  <div class="field">
+  <div class="field form-group">
     <%= f.hidden_field :project_id %>
   </div>
   
-   <div class="field">  
+    <div class="field form-group">
+  	 <%= f.label :job_state_id, "Status" %>
+    
+     <%  @selected_states = set_one_state_from_company(1) %>
+     <%= f.collection_select :job_state_id, @selected_states, :_id, :name, include_blanks: true %>
+
+   </div> 
+ 
+   <div class="field form-group">
   	 <%= f.label :location_id, "Location" %>
     
-     <%  @aux = set_one_location_from_company(session[:company_id]) %>
-     <%= f.collection_select :location_id, @aux, :_id, :name, include_blanks: true %>
+     <%  @selected_locations = set_one_location_from_company(session[:company_id]) %>
+     <%= f.collection_select :location_id, @selected_locations, :_id, :name, include_blanks: true %>
 
    </div>
 
    <% @company = set_company_from_session(session[:company_id]) %>
    <% @location1 = set_one_location_from_company(session[:company_id]) %>
 
-   <div class="field">  
+   <div class="field form-group">  
    	
      <%= f.label :material_id, "Material" %>
           
@@ -83,7 +97,7 @@
   
    </div>
  
-   <div class="field">  
+   <div class="field form-group">  
      
      <%= f.label :equipment_id, "Equipment" %>
      
