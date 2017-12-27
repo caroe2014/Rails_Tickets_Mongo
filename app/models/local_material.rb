@@ -7,6 +7,7 @@ class LocalMaterial
   field :minimum, type: Integer
   field :maximum, type: Integer
   field :quantity, type: Integer
+  field :production_cost, type: BigDecimal, default: 0.0  
   field :status, type: Integer
   
   belongs_to :location

@@ -27,6 +27,7 @@ gem 'simple_form', '~> 3.3'
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 
+gem 'bootstrap-glyphicons', '~> 0.0.1'
 gem 'angularjs-rails', '~> 1.5', '>= 1.5.6'
 gem 'angular-rails-templates', '~> 1.0'
 gem 'angular-ui-router-rails', '~> 0.2.15'
@@ -40,7 +41,9 @@ gem 'simple_js_data'
 gem 'jquery-turbolinks', '~> 2.1'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
+# gem 'jbuilder', '~> 2.0'
+gem 'rabl', '~> 0.13.1'
+
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 

@@ -1,55 +1,78 @@
-<div class="container">
+<div class="container-fluid">
   <!--div class="view-container">
     <div ng-view class="view-frame animate-view"></div>
 </div-->
 
-   <div ng-controller="TicketsCtrl">
-
-   <div ng-controller="ProjectController" ng-init="SetProjectId(PprojectId)">
+   <div ng-controller="TicketsCtrl" ng-init= "showinfo = 0">
+     
+     <div ng-controller="ProjectController" ng-init="SetProjectId(PprojectId)">
    		 <div id="div-project-data" data-project-name="<%= @project_name %>"
 		            data-project-id="<%= @project_id %>"></div>
 		         
-       <h2> {{ project.name }}</h2> 
+         <h2> {{ project.name }}</h2> 
        
-   </div> 	
-    <table class="table table-bordered table-striped">
-    	
-      <thead>
-      	<tr>
-      		<th><h4>List of Tickets</h4></th>
-      		<th>
-    			
-      			<a class="btn btn-info" ng-click="anadir = 1">Add Ticket</a>
-      			<a class="btn btn-warning" ng-click="anadir = 0">Cancel</a>
-    			
-      		</th>	
-      	</tr>	
-        <tr>
-          <th>Number</th>
-          <th>Line Item</th>
-          <th>Description</th>
-          <th>Width</th>
-          <th>Height</th>
-          <th>Qty</th>
-          <th></th>
-          <th>&nbsp;</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-show="!tickets.length">
-          <td colspan="4">No Tickets for this Project</td>
-        </tr>
-        <tr ng-repeat="ticket in tickets">
-          <td>{{ ticket.name }}</td>
-          <td>{{ ticket.subname }}</td>
-          <td>{{ ticket.description }}</td>
-          <td>{{ ticket.width }}</td>
-          <td>{{ ticket.height }}</td>                    
-          <td>{{ ticket.qty }}</td>
-          <td><a class="btn btn-danger" ng-click="deleteTicket($index)">Remove</a></td>
-        </tr>
-      </tbody>
-    </table>
-   	
+     </div> 	
+	   
+     <div ng-show="showinfo == 0">
+	    <table class="table table-bordered table-striped panel panel-defaut">
+	    	
+	      <thead "navbar navbar-inverse" data-spy="affix" data-offset-top="135" >
+	      	<tr>
+	      		<th></th>
+	      		<th>
+	    			
+	      			<a class="btn btn-info" ng-click="anadir = 1">Add Ticket</a>
+	      			<a class="btn btn-warning" ng-click="anadir = 0">Cancel</a>
+	    			
+	      		</th>	
+	      	</tr>	
+	        <tr>
+	          <th>Status</th>
+	          <th>Location</th> 	
+	          <th>Name</th>
+	          <th>Line Item</th>
+	          <th>Description</th>
+	          <th>Width</th>
+	          <th>Height</th>
+	          <th>Qty</th>
+	          <th>Single</th>
+	          <th>Double</th>
+	          <th>Material</th>
+	          <th>Printer</th>
+	          <th>&nbsp;</th>
+	          <th>&nbsp;</th>
+          	          
+	        </tr>
+	      </thead>
+	      <tbody "panel-body">
+	        <tr ng-show="!tickets.length">
+	          <td colspan="4">No Tickets for this Project</td>
+	        </tr>
+	        <tr ng-repeat="ticket in tickets">	
+	          <td>{{ ticket.job_state_id }}</td>
+	          <td>{{ ticket.location_id }}</td>	
+	          <td>{{ ticket.name }}</td>
+	          <td>{{ ticket.subname }}</td>
+	          <td>{{ ticket.description }}</td>
+	          <td>{{ ticket.width }}</td>
+	          <td>{{ ticket.height }}</td>                    
+	          <td>{{ ticket.qty }}</td>
+	          <td>{{ ticket.single }}</td>
+	          <td>{{ ticket.double }}</td>
+	          <td>{{ ticket.material_id }}</td>
+	          <td>{{ ticket.equipment_id }}</td>
+	          <td><a class="btn btn-danger" ng-click="deleteTicket($index)">Rem</a></td>
+	          <td><a class="btn btn-info" ng-click="showDetailedTicket($index)">Show</a></td>
+	        </tr>
+	      </tbody>
+	    </table>
+   	 </div>
+   	 
+   	 <div class= "well" ng-show="showinfo == 1">
+     	<div ng-controller="TicketCtrl as show" ng-if="showinfo == 1"  >
+           <div ng-view></div>
+        </div>    
+     </div>
+   	 
    </div>	
 </div>

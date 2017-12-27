@@ -73,6 +73,6 @@ class LocalEquipmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def local_equipment_params
-      params.require(:local_equipment).permit(:name, :equipment_type, :status, :location_id)
+      params.require(:local_equipment).permit(:name, :equipment_type, :production_per_hour, :status, :location_id)
     end
 end

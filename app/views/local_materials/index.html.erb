@@ -10,6 +10,7 @@
 		  <th>Location</th>	
 	      <th>Name</th>
 	      <th>Quantity</th>
+	      <th>Production Cost</th>
 	      <th>Status</th>
 	      <th colspan="3"></th>
 	    </tr>
@@ -21,6 +22,7 @@
                 <td><%= local_material.location.name %></td>  
 		        <td><%= local_material.name %></td>
 		        <td><%= local_material.quantity %></td>
+		        <td><%= local_material.production_cost %></td>
 		        <td><%= local_material.status %></td>
 		        <td><%= link_to 'Show', local_material, :class => "btn btn-success" %></td>
 		        <td><%= link_to 'Edit', edit_local_material_path(local_material), :class => "btn btn-warning" %></td>

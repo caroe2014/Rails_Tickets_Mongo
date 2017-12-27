@@ -24,8 +24,12 @@ class TicketsController < ApplicationController
   end
 
   def show
-#    respond_with(@ticket.as_json)
-    render json: @tickets
+                      
+    @ticket = PrintingTicket.find(params[:id])
+    respond_to do |format|
+ 
+      format.json { render json: @ticket }
+    end 
   end
 
   def update

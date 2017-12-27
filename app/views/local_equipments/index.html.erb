@@ -9,6 +9,7 @@
 	      <th>Location</th>	    	
 	      <th>Name</th>
 	      <th>Equipment type</th>
+	      <th>Production/Hour</th>
 	      <th>Status</th>
 	      <th colspan="3"></th>
 	    </tr>
@@ -20,6 +21,7 @@
 	        <td><%= local_equipment.location.name %></td>
 	        <td><%= local_equipment.name %></td>
 	        <td><%= local_equipment.equipment_type %></td>
+	        <td><%= local_equipment.production_per_hour %></td
 	        <td><%= local_equipment.status %></td>
 
 	        <td><%= link_to 'Show', local_equipment, :class => "btn btn-success" %></td>

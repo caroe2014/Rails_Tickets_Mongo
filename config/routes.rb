@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   get 'tickets/index'
   get 'tickets/create'
-#  get 'tickets/destroy'
+  get 'tickets/show'
 
   get "projects_show", to: "projects#show"  
 
@@ -27,8 +27,7 @@ Rails.application.routes.draw do
   end
 
   resources :locations do
-    resources :printing_tickets
-    
+    resources :local_tickets
   end
 
   resources :projects do

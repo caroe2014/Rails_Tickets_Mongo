@@ -1,0 +1,58 @@
+<div class="container">
+	<p id="notice"><%= notice %></p>
+	
+	<p>
+	  <strong>Name:</strong>
+	  <%= @printing_ticket.name %>
+	</p>
+	
+	<p>
+	  <strong>Description:</strong>
+	  <%= @printing_ticket.description %>
+	</p>
+	
+	<p>
+	  <strong>Width:</strong>
+	  <%= @printing_ticket.width %>
+	</p>
+	
+	<p>
+	  <strong>Height:</strong>
+	  <%= @printing_ticket.height %>
+	</p>
+	
+	<p>
+	  <strong>Qty:</strong>
+	  <%= @printing_ticket.qty %>
+	</p>
+	
+	<p>
+	  <strong>Single:</strong>
+	  <%= @printing_ticket.single %>
+	</p>
+	
+	<p>
+	  <strong>Double:</strong>
+	  <%= @printing_ticket.double %>
+	</p>
+	
+	
+	<p>
+	  <strong>Location:</strong>
+	  <%= @printing_ticket.location.name %>
+	</p>
+
+	<p>
+	  <strong>Material:</strong>
+
+	  <%= LocalMaterial.find_by_id(@printing_ticket.material_id).name %>
+	</p>
+	
+	<p>
+	  <strong>Printer:</strong>
+	  <%= LocalEquipment.find_by_id(@printing_ticket.equipment_id).name %>
+	</p>
+	<% temp_location_id = @printing_ticket.location_id %>
+	<%= link_to 'Edit', edit_location_local_ticket_path(temp_location_id, @printing_ticket), :class => "btn btn-info" %> |
+	<%= link_to 'Back', location_local_tickets_path(params[:location_id]), :class => "btn btn-info" %>
+</div>

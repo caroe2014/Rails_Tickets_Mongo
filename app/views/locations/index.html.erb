@@ -9,9 +9,13 @@
 
 	      <th>Name</th>
 	      <th>Shortname</th>
-	      <th>Address1</th>
-	      <th>Address2</th>
-	      <th colspan="3"></th>
+	      <th>Total Tickets </th>
+	      <th>Total SQR Feet</th>
+	      <th>In Process Tickets </th>
+	      <th>In Process SQR Feet</th>	      
+	      <th>Done Tickets </th>
+	      <th>Done SQR Feet</th>
+	      <th colspan="7"></th>
 	    </tr>
 	  </thead>
 	
@@ -19,15 +23,18 @@
 	    <% @locations.each do |location| %>
 	      <tr>
 	      	
-	        <td><%= location.name %></td>
-	        <td><%= location.shortname %></td>
+	        <td><%= link_to location.name, edit_location_path(location) %></td>
+	       
+	        <td><%= link_to location.shortname, edit_location_path(location)%></td>
 	        <td><%= location.address1 %></td>
 	        <td><%= location.address2 %></td>
-	        <td><%= link_to 'Show', location ,:class => "btn btn-success" %></td>
-	        <td><%= link_to 'Edit', edit_location_path(location), :class => "btn btn-warning" %></td>
-	        <td><%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
-	        <td><%= link_to 'New Tickets', new_location_printing_ticket_path(location), :class => "btn btn-info" %></td>
-	        <td><%= link_to 'List Tickets', location_printing_tickets_path(location), :class => "btn btn-info" %></td>	        
+	        <td><%= location.address1 %></td>
+	        <td><%= location.address2 %></td>
+	        <td><%= location.address1 %></td>
+	        <td><%= location.address2 %></td>	        
+	        <td><%= link_to '-', location, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+	        <td><%= link_to '+', new_location_local_ticket_path(location), :class => "btn btn-info" %></td>
+	        <td><%= link_to 'List Tickets', location_local_tickets_path(location), :class => "btn btn-info" %></td>	        
 	      </tr>
 	    <% end %>
 	  </tbody>

@@ -8,8 +8,8 @@
 	    <tr>
 	      <th>Status</th>	
 	      <th>Location</th>	
-	      <th>Name</th>
-          <th>Subname</th>
+	      <th>Number</th>
+          <th>Line Item</th>
 	      <th>Description</th>
 	      <th>Width</th>
 	      <th>Height</th>
@@ -18,7 +18,7 @@
 	      <th>Double</th>
 	      <th>Material</th>
 	      <th>Printer</th>
-	      <th colspan="3"></th>
+	      <th colspan="5"></th>
 	    </tr>
 	  </thead>
 	
@@ -53,8 +53,9 @@
 		        <% else %>
 		           <td>No Equipment Linked</td>
 		        <% end %>		           
-		           
-		        <td><%= link_to '-' , project_printing_ticket_url(@project_id, printing_ticket), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+
+		        <td><%= link_to 'Del', project_printing_ticket_url(@project_id, printing_ticket), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>   
+		        </td>
 		      </tr>
 		    <% end %>
 		 <% end %>   

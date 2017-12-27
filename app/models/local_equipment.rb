@@ -5,6 +5,7 @@ class LocalEquipment
   field :name, type: String
   field :equipment_type, type: String
   field :status, type: Integer
+  field :production_per_hour, type: BigDecimal, default: 0.0
   field :location_id, type: String
   
   belongs_to :location 

@@ -1,0 +1,9 @@
+<div class="container">
+	<h1>Editing Printing Ticket</h1>
+	
+	<%= render 'form' %>
+	                   
+	<%= link_to 'Show', location_local_ticket_url(params[:location_id], @printing_ticket), :class => "btn btn-info" %> |
+
+	<%= link_to 'Back', location_local_tickets_path(params[:location_id]), :class => "btn btn-info" %>
+</div>

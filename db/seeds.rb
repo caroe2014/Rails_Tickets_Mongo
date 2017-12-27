@@ -14,7 +14,7 @@ Company.each do |cia|
     le = LocalEquipment.where(location_id: loc._id).first
        
     JobState.each do |js|
-      5.times do |i|     
+      2.times do |i|     
         js_s = js._id.to_s
         fn = Faker::Number.number    
         PrintingTicket.create!(name: "WT" + fn.to_s,
@@ -25,8 +25,8 @@ Company.each do |cia|
                                qty: rand(1..20).to_s,
                                single: true,
                                double: false,
-                               local_material_id: lm._id.to_s,
-                               local_equipment_id: le._id.to_s,
+                               material_id: lm._id.to_s,
+                               equipment_id: le._id.to_s,
                                location_id: loc._id,
                                project_id: project._id,
                                job_state_id: js_s

@@ -25,12 +25,12 @@
   font-family: 'Glyphicons Halflings';
   font-style: normal;
   font-weight: normal;
-  line-height: 1;
+  line-height: 3;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
   &:empty {
-    width: 1em;
+    width: 3em;
   }
 }
 

@@ -26,5 +26,10 @@ module ApplicationHelper
       proyecto = Project.find(p)
       proyecto.name
   end
+
+  def location_name(p)
+      location = Location.find(p)
+      location.name
+  end
         
 end

@@ -1,0 +1,8 @@
+<div class="container">
+	
+	<h2>New Ticket for: <%= project_name(@project_id) %></h2>
+	
+	<%= render 'form' %>
+	<%= link_to 'Back', location_local_tickets_path(params[:location_id]), :class => "btn btn-info" %>
+	<input id="location_id" type="hidden" value="<%= params[:location_id] %>" />
+</div>

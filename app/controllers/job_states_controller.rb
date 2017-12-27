@@ -4,12 +4,13 @@ class JobStatesController < ApplicationController
   # GET /job_states
   # GET /job_states.json
   def index
-    @job_states = JobState.all
+    @job_states = JobState.all.order_by(:step_number => 'asc')
   end
 
   # GET /job_states/1
   # GET /job_states/1.json
   def show
+    render json: @job_state
   end
 
   # GET /job_states/new
@@ -29,8 +30,8 @@ class JobStatesController < ApplicationController
     respond_to do |format|
       if @job_state.save
 #        format.html { redirect_to @job_state, notice: 'Job state was successfully created.' }
-        format.html { redirect_to @job_state, notice: 'Job state was successfully created.' }
-        format.json { render :show, status: :created, location: @job_state }
+        format.html { redirect_to job_states_path, notice: 'Job state was successfully created.' }
+        format.json { render :index, status: :created, location: @job_state }
       else
         format.html { render :new }
         format.json { render json: @job_state.errors, status: :unprocessable_entity }
@@ -43,7 +44,7 @@ class JobStatesController < ApplicationController
   def update
     respond_to do |format|
       if @job_state.update(job_state_params)
-        format.html { redirect_to @job_state, notice: 'Job state was successfully updated.' }
+        format.html { redirect_to job_states_path, notice: 'Job state was successfully updated.' }
         format.json { render :index, status: :ok, location: @job_state }
       else
         format.html { render :edit }

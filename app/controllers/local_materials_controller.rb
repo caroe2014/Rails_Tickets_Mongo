@@ -75,6 +75,6 @@ class LocalMaterialsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def local_material_params
-      params.require(:local_material).permit(:company_id, :location_id, :name, :minimum, :maximum, :quantity, :status)
+      params.require(:local_material).permit(:company_id, :location_id, :name, :minimum, :maximum, :quantity, :production_cost, :status)
     end
 end
