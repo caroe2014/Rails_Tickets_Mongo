@@ -14,19 +14,19 @@
      </div> 	
 	   
      <div ng-show="showinfo == 0">
-	    <table class="table table-bordered table-striped panel panel-defaut">
+	    <table class="table table-bordered table-striped">
 	    	
 	      <thead "navbar navbar-inverse" data-spy="affix" data-offset-top="135" >
 	      	<tr>
 	      		<th></th>
 	      		<th>
 	    			
-	      			<a class="btn btn-info" ng-click="anadir = 1">Add Ticket</a>
+	      			<a class="btn btn-info" ng-click="createTicket()">Add Ticket</a>
 	      			<a class="btn btn-warning" ng-click="anadir = 0">Cancel</a>
 	    			
 	      		</th>	
 	      	</tr>	
-	        <tr>
+	        <tr class="row align-items-center">
 	          <th>Status</th>
 	          <th>Location</th> 	
 	          <th>Name</th>
@@ -48,8 +48,9 @@
 	        <tr ng-show="!tickets.length">
 	          <td colspan="4">No Tickets for this Project</td>
 	        </tr>
-	        <tr ng-repeat="ticket in tickets">	
-	          <td>{{ ticket.job_state_id }}</td>
+	        <tr ng-repeat="ticket in tickets" class="row align-items-center">
+	          <div class="col-sm-1">		
+	          <td>{{ ticket.job_state_id }}</td></div>
 	          <td>{{ ticket.location_id }}</td>	
 	          <td>{{ ticket.name }}</td>
 	          <td>{{ ticket.subname }}</td>
@@ -64,12 +65,14 @@
 	          <td><a class="btn btn-danger" ng-click="deleteTicket($index)">Rem</a></td>
 	          <td><a class="btn btn-info" ng-click="showDetailedTicket($index)">Show</a></td>
 	        </tr>
+	       	       
 	      </tbody>
 	    </table>
+
    	 </div>
    	 
    	 <div class= "well" ng-show="showinfo == 1">
-     	<div ng-controller="TicketCtrl as show" ng-if="showinfo == 1"  >
+     	<div ng-controller="TicketCtrl as TicketCtrl" ng-if="showinfo == 1"  >
            <div ng-view></div>
         </div>    
      </div>

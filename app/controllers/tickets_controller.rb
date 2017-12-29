@@ -26,10 +26,10 @@ class TicketsController < ApplicationController
   def show
                       
     @ticket = PrintingTicket.find(params[:id])
-    respond_to do |format|
- 
-      format.json { render json: @ticket }
-    end 
+   respond_to do |format|
+     format.html
+     format.json { render json: @ticket }
+   end 
   end
 
   def update

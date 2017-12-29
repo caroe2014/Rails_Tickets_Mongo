@@ -5,25 +5,23 @@ ticketApp = angular.module('TicketModule', ['templates', 'ngRoute', 'ngResource'
 //    $('meta[name=csrf-token]').attr('content');
 // });
 
-
-
 // ****  Angular Routes
 
 ticketApp.config([ '$routeProvider',
                  function($routeProvider) {
     $routeProvider           
       .when('/backtotickets', {
-        templateUrl: "index.html"
+        templateUrl: "ticketindex.html"
       })
       .when('/:id', {
-        templateUrl: "show.html"
+        templateUrl: "ticketshow.html",
 //        controller: 'TicketCtrl'
       })
-      .when('/:id/edit', {
-        templateUrl: "edit.html"
+      .when('/new', {
+        templateUrl: "ticketnew.html"
 //        controller: 'TicketCtrl'
-
-      });             
+      });
+                  
 }]);
 
 // *** Passing parameters Controller
@@ -40,7 +38,7 @@ ticketApp.controller("itemsControllerHiddenDiv", ["$scope", "$routeParams" ,func
     $routeParams.id = store.id;
 }]);
 
-// ************** Project controller: Show action
+// ************** Rails Projects controller: Show action
 
 ticketApp.controller("ProjectController", ["$scope", "$resource" ,function($scope, $resource) {
 	
@@ -54,43 +52,52 @@ ticketApp.controller("ProjectController", ["$scope", "$resource" ,function($scop
     
 }]);
 
-// ************** JobState controller: Show action
+// ******** Rails Job_states Controller. Angular Show Controller
 
-ticketApp.controller("JobStateController", ["$scope", "$resource" ,function($scope, $resource) {
+ticketApp.controller("JobStateCtrl", ["$scope", "$resource" ,function($scope, $resource) {
 	
-	var JobStateInfo = $resource('/job_states/show/:id.json');
+	var JobStateInfo1 = $resource('/job_states/:id.json');
 
 	$scope.setcolorstatus = function(index) {
 				
-		job_state = JobStateInfo.get(
+		job_state = JobStateInfo1.get(
 			{ "id": $scope.ticket.job_state_id }
 		);
-		$scope.status.color = job_state.color;
-		$scope.status.name  = job_state.name; 
+		$scope.jobstate.color = job_state.color;
+		$scope.jobstate.name  = job_state.name; 
 	}
-    
+        
 }]);
 
-// ************** Index Factory
+// ******** Rails Job_states Controller. Angular Index Controller
+
+ticketApp.controller("JobStatesCtrl", ["$scope", "$resource" ,function($scope, $resource) {
+	
+	var JobStateInfo = $resource('/job_states/index.json');
+			
+	$scope.jobstates = JobStateInfo.get( {  } );
+	$scope.selected = $scope.jobstate[0]; 
+}]);
+
+// ******** Rails Tickets Controller. Angular Index Factory
 
 ticketApp.factory("FtryTickets", function($location, $routeParams, $resource) {
   
-  betweenstrings = function(original,str1,str2) {
-  	var resultstring = original.substring(original.search(str1) + str1.length,
-  		                                 original.search(str2));  		                                 
-  		return resultstring;
-  }
+//  betweenstrings = function(original,str1,str2) {
+//  	var resultstring = original.substring(original.search(str1) + str1.length,
+//  		                                 original.search(str2));  		                                 
+//  		return resultstring;
+//  }
   
-  $routeParams.id = betweenstrings($location.absUrl(),"/projects/","/tickets");
+//  $routeParams.id = betweenstrings($location.absUrl(),"/projects/","/tickets");
   
-    return $resource("/tickets/index.json", {  }, {
+    return $resource($location.absUrl() + ".json", {  }, {
     	
-    index:   { method: 'GET', params: { project_id: $routeParams.id }, isArray: true, responseType: 'json' }
-    
+   index:   { method: 'GET', isArray: true, responseType: 'json' } 
   });
 })
 
-// *********** Show Factory
+// ******** Rails Tickets Controller. Angular Show Factory
 
 ticketApp.factory("FtryTicket", function($location, $routeParams, $resource) {
   
@@ -100,7 +107,8 @@ ticketApp.factory("FtryTicket", function($location, $routeParams, $resource) {
 
     $routeParams.id = $routeParams.ticketId;
     
-    ngpath = ngpath + ngId + ".json"            
+    ngpath = ngpath + ngId + ".json"
+                   
 	return $resource( ngpath , { }, {	    	
 	  show:   { method: 'GET', responseType: 'json' },
 	  update:  { method: 'PUT' },
@@ -108,7 +116,7 @@ ticketApp.factory("FtryTicket", function($location, $routeParams, $resource) {
 	});
 })
 
-// ******** Show Controller
+// ******** Rails Tickets Controller. Angular Show Controller
 
 ticketApp.controller("TicketCtrl", [ "$scope", "$location", "$http", "$resource", "$routeParams", "FtryTicket", 
                                 function ($scope, $location, $http, $resource, $routeParams, FtryTicket) {
@@ -130,10 +138,22 @@ ticketApp.controller("TicketCtrl", [ "$scope", "$location", "$http", "$resource"
     $routeParams.id = $scope.project.id;
           
     this.ticket = FtryTicket.show();
+      
+//    this.newTicket = FtryTicket.create();
+    
+    $scope.addticket = function() {
+   	    if ($scope.form.$valid) { 
+   	    	alert(" Salvando ");
+ 	    	                 
+            ticket = Tickets.save($scope.newTicket);
+            $scope.tickets.push(ticket);
+            this.newTicket = {};
+         }     	
+    };
     
 }]);
 
-// ********* Index Controller
+// ******** Rails Tickets Controller. Angular index Controller
 
 ticketApp.controller("TicketsCtrl", [ "$scope", "$location", "$resource", "$routeParams", "FtryTickets", 
                                 function ($scope, $location, $resource, $routeParams, FtryTickets) {
@@ -148,18 +168,7 @@ ticketApp.controller("TicketsCtrl", [ "$scope", "$location", "$resource", "$rout
     $routeParams.id = $scope.project.id;
    
     $scope.tickets = FtryTickets.index();                                                
-
-    $scope.addTicket = function() {
-   	    if ($scope.form.$valid) { 
-   	    	alert(" Salvando ");
- 	    	                 
-            $scope.ticket = Tickets.save($scope.newTicket);
-            $scope.tickets.push(ticket);
-            $scope.newTicket = {};
-         }                 
-    }
     
-
     $scope.showDetailedTicket = function(index) {
        var theticket = $scope.tickets[index]
             
@@ -169,8 +178,12 @@ ticketApp.controller("TicketsCtrl", [ "$scope", "$location", "$resource", "$rout
        $location.path("/" + theticket.id );
     }
 
+    $scope.createTicket = function() {
+    	
+        $scope.showinfo = 1;
+        $location.path("/new");                
+    }
     
-
    $scope.deleteTicket = function(index) {
      ticket = $scope.tickets[index]
      Ticket.delete(ticket)

@@ -5,7 +5,7 @@
 
 	<table class= "panel panel-defaut">
 	  <thead class= "navbar navbar-inverse" data-spy="affix" data-offset-top="135">
-	    <tr>
+	    <tr class="row align-items-center">
 	      <th>Status</th>	
 	      <th>Location</th>	
 	      <th>Number</th>
@@ -27,7 +27,7 @@
 	   
 	  	<% if @printing_tickets.present? %>
 		    <% @printing_tickets.each do |printing_ticket| %>
-		      <tr> 
+		      <tr class="row align-items-center"> 
 	            <% if printing_ticket.present? %>          		      
 		   		   <td class = "<%= JobState.where(_id: printing_ticket.job_state_id).first.color %> "><%= JobState.where(_id: printing_ticket.job_state_id).first.name %></td>
 		        <% else %>
