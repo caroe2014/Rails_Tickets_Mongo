@@ -1,41 +1,43 @@
 <h3>Insert New Ticket</h3>
+
+
 <form id="form" ng-submit="addticket()"><div class = "row"> 
 	<div class = "col-sm-3">
 	  
 		  <div class="field form-group ">
 
 		    <input type="text" class="form-control"
-		           ng-model="show.newTicket.name">
+		           ng-model="newTicket.name">
 		  </div>
 	 
 		  <div class="field form-group ">
 
 		    <input type="text" class="form-control"
-		           ng-model="show.newTicket.subname">
+		           ng-model="newTicket.subname">
 		  </div>
 		  	  	    	   
 		  <div class="field form-group ">
 	
 		    <input type="text" class="form-control"
-		           ng-model="show.newTicket.description">
+		           ng-model="newTicket.description">
 		  </div>
 	  
 		  <div class="field form-group ">
 
 		    <input type="text" class="form-control"
-		           ng-model="show.newTicket.width">
+		           ng-model="newTicket.width">
 		  </div>	
 	  	  	  
 		  <div class="field form-group ">
 
 		    <input type="text" class="form-control"
-		           ng-model="show.newTicket.height">
+		           ng-model="newTicket.height">
 		  </div>
 		  
 		  <div class="field form-group ">
 
 		    <input type="text" class="form-control"
-		           ng-model="show.newTicket.qty">
+		           ng-model="newTicket.qty">
 		  </div>	   	  
 	  	 
 	</div>  
@@ -46,18 +48,18 @@
 		  <div class="col-sm-3">
 			<div class="form-group">
 			    <input name="group100" type="radio" id="single" checked>
-			    <label ng-model="show.newTicket.single">Single</label>
+			    <label ng-model="newTicket.single">Single</label>
 			</div>
 			
 			<div class="form-group">
 			    <input name="group100" type="radio" id="double">
-			    <label ng-model="show.newTicket.double">Double</label>
+			    <label ng-model="newTicket.double">Double</label>
 			</div>		  	
 		 
 		  </div>   
 	  </div> 
 	  	  
-	  <div class="row" ng-controller="JobStatesCtrl">		  
+	  <div class="row" ng-controller="JobStatesCtrl as JobStatesCtrl">		  
 	  	 
       <select ng-options="jobstate as jobstate.name for jobstate in jobstates track by jobstate.id" ng-model="selected"></select>
               

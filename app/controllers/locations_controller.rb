@@ -9,10 +9,15 @@ class LocationsController < ApplicationController
   def index
 
 #    @locations = Location.where( {:company_id => session[:company_id] } ).first
-     
+
      session[:company_id] = @company._id.to_s
-     
+   
      @locations = Location.where( { :company_id => @company._id } )
+     
+     respond_to do |format|
+       format.html
+       format.json { render json: @locations }
+     end
   end
 
   # GET /locations/1

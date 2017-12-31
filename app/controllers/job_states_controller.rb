@@ -5,6 +5,10 @@ class JobStatesController < ApplicationController
   # GET /job_states.json
   def index
     @job_states = JobState.all.order_by(:step_number => 'asc')
+    respond_to do |format|
+      format.html
+      format.json { render json: @job_states }
+    end    
   end
 
   # GET /job_states/1

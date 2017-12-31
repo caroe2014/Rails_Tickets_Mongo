@@ -3,29 +3,84 @@
     <div ng-view class="view-frame animate-view"></div>
 </div-->
 
-   <div ng-controller="TicketsCtrl" ng-init= "showinfo = 0">
+   <div ng-controller="MainTicketsCtrl as TicketCtrl" ng-init= "showinfo = 0">
      
      <div ng-controller="ProjectController" ng-init="SetProjectId(PprojectId)">
    		 <div id="div-project-data" data-project-name="<%= @project_name %>"
-		            data-project-id="<%= @project_id %>"></div>
+		            data-project-id="<%= @project_id %>" data-company-id="<%= @company_id %>" ></div>
 		         
          <h2> {{ project.name }}</h2> 
        
      </div> 	
-	   
+
+<!--   *************************************************          -->
+
+    <div class="well">
+      <h3>Add a new ticket</h3>
+      <form ng-submit="addTicket()">
+        <div class="row">
+          <div class="col-xs-2">
+            <input type="text" ng-model="newTicket.name" class="form-control" placeholder="Work Ticket" />
+          </div>
+          <div class="col-xs-2">
+            <input type="text" ng-model="newTicket.subname" class="form-control" placeholder="Line Item" />
+          </div>
+          <div class="col-xs-4">
+            <input type="text" ng-model="newTicket.desription" class="form-control" placeholder="Description" />
+          </div>          
+          <div class="col-xs-1">
+            <input type="text" ng-model="newTicket.width" class="form-control" placeholder="Width" />
+          </div>
+          <div class="col-xs-1">
+            <input type="text" ng-model="newTicket.height" class="form-control" placeholder="Height" />
+          </div>          
+          <div class="col-xs-1">
+            <input type="text" ng-model="newTicket.qty" class="form-control" placeholder="Qty" />
+          </div> 
+        </div>
+
+        <div class="row">
+          <div class="col-xs-2">
+            <input type="text" ng-model="newTicket.project_id" class="form-control" placeholder="Project" />
+          </div>
+          
+          <div class="col-xs-6 btn-lg" ng-init="loadlocations()">	
+          	 <label for="location101">Location:</label> 	  
+             <select id="location101" ng-options="location as location.name for location in locations track by location.id" 
+                     ng-model="newTicket.location_id" ng-change="jobstateupdate()"></select>   
+	      </div>          
+        </div> 
+        <div class="row">
+         
+          <div class="col-xs-2">
+            <input type="text" ng-model="newTicket.material_id" class="form-control" placeholder="Material" />
+          </div> 
+          <div class="col-xs-2">
+            <input type="text" ng-model="newTicket.equipment_id" class="form-control" placeholder="Equipment" />
+          </div> 
+        </div>
+        <div class="row">
+          <div class="col-xs-6 btn-lg" ng-init="loadjobstates()">
+          	 <label for="jobstate101">Location:</label> 		  
+             <select id="jobstate101" ng-options="jobstate as jobstate.name for jobstate in jobstates track by jobstate.id" ng-model="newTicket.job_state_id" ng-change="jobstateupdate()"></select>   
+	      </div>                  
+        </div>
+
+        <div class="row">
+          <div class="col-xs-2 text-center">
+            <br />
+            <input type="Submit" value="Add Ticket" class="btn btn-info" />
+          </div>
+        </div>
+      </form>
+    </div>
+
+<!--   *************************************************          -->	   
      <div ng-show="showinfo == 0">
 	    <table class="table table-bordered table-striped">
 	    	
 	      <thead "navbar navbar-inverse" data-spy="affix" data-offset-top="135" >
-	      	<tr>
-	      		<th></th>
-	      		<th>
-	    			
-	      			<a class="btn btn-info" ng-click="createTicket()">Add Ticket</a>
-	      			<a class="btn btn-warning" ng-click="anadir = 0">Cancel</a>
-	    			
-	      		</th>	
-	      	</tr>	
+	
 	        <tr class="row align-items-center">
 	          <th>Status</th>
 	          <th>Location</th> 	
@@ -71,11 +126,11 @@
 
    	 </div>
    	 
-   	 <div class= "well" ng-show="showinfo == 1">
-     	<div ng-controller="TicketCtrl as TicketCtrl" ng-if="showinfo == 1"  >
+   	 <!-- div class= "well" ng-show="showinfo == 1">
+     	<div ng-if="showinfo == 1"  >
            <div ng-view></div>
         </div>    
-     </div>
+     </div -->
    	 
    </div>	
 </div>

@@ -52,23 +52,6 @@ ticketApp.controller("ProjectController", ["$scope", "$resource" ,function($scop
     
 }]);
 
-// ******** Rails Job_states Controller. Angular Show Controller
-
-ticketApp.controller("JobStateCtrl", ["$scope", "$resource" ,function($scope, $resource) {
-	
-	var JobStateInfo1 = $resource('/job_states/:id.json');
-
-	$scope.setcolorstatus = function(index) {
-				
-		job_state = JobStateInfo1.get(
-			{ "id": $scope.ticket.job_state_id }
-		);
-		$scope.jobstate.color = job_state.color;
-		$scope.jobstate.name  = job_state.name; 
-	}
-        
-}]);
-
 // ******** Rails Job_states Controller. Angular Index Controller
 
 ticketApp.controller("JobStatesCtrl", ["$scope", "$resource" ,function($scope, $resource) {
@@ -79,42 +62,6 @@ ticketApp.controller("JobStatesCtrl", ["$scope", "$resource" ,function($scope, $
 	$scope.selected = $scope.jobstate[0]; 
 }]);
 
-// ******** Rails Tickets Controller. Angular Index Factory
-
-ticketApp.factory("FtryTickets", function($location, $routeParams, $resource) {
-  
-//  betweenstrings = function(original,str1,str2) {
-//  	var resultstring = original.substring(original.search(str1) + str1.length,
-//  		                                 original.search(str2));  		                                 
-//  		return resultstring;
-//  }
-  
-//  $routeParams.id = betweenstrings($location.absUrl(),"/projects/","/tickets");
-  
-    return $resource($location.absUrl() + ".json", {  }, {
-    	
-   index:   { method: 'GET', isArray: true, responseType: 'json' } 
-  });
-})
-
-// ******** Rails Tickets Controller. Angular Show Factory
-
-ticketApp.factory("FtryTicket", function($location, $routeParams, $resource) {
-  
-    var project_id = $routeParams.id;
-    var ngpath = "/projects/" + project_id + "/tickets/";    
-    var ngId = $routeParams.ticketId;
-
-    $routeParams.id = $routeParams.ticketId;
-    
-    ngpath = ngpath + ngId + ".json"
-                   
-	return $resource( ngpath , { }, {	    	
-	  show:   { method: 'GET', responseType: 'json' },
-	  update:  { method: 'PUT' },
-	  create:  { method: 'POST' }	    
-	});
-})
 
 // ******** Rails Tickets Controller. Angular Show Controller
 
@@ -123,66 +70,87 @@ ticketApp.controller("TicketCtrl", [ "$scope", "$location", "$http", "$resource"
 
     var div = document.getElementById('div-project-data');
    
-    $scope.project = {id:   div.getAttribute("data-project-id"),
-                      name: div.getAttribute("data-project-name")                   
+    $scope.project = {id:   div.getAttribute("data-project-id"),  
+                      name: div.getAttribute("data-project-name"),
+                      company: div.getAttribute("data-company-id")        
                      };
-
-    $scope.backtotickets = function(p1) {
-
-       $scope.showinfo = p1;
-       $location.path("/backtotickets");
-     
-    }
-       
+                          
     $scope.PprojectId = $scope.project.id;
     $routeParams.id = $scope.project.id;
-          
-    this.ticket = FtryTicket.show();
+    $routeParams.company_id = $scope.project.company;
       
 //    this.newTicket = FtryTicket.create();
-    
-    $scope.addticket = function() {
-   	    if ($scope.form.$valid) { 
-   	    	alert(" Salvando ");
- 	    	                 
-            ticket = Tickets.save($scope.newTicket);
-            $scope.tickets.push(ticket);
-            this.newTicket = {};
-         }     	
-    };
-    
+        
 }]);
 
 // ******** Rails Tickets Controller. Angular index Controller
 
-ticketApp.controller("TicketsCtrl", [ "$scope", "$location", "$resource", "$routeParams", "FtryTickets", 
-                                function ($scope, $location, $resource, $routeParams, FtryTickets) {
+ticketApp.controller("MainTicketsCtrl", [ "$scope", "$location", "$resource", "$routeParams", 
+                                function ($scope, $location, $resource, $routeParams) {
 
     var div = document.getElementById('div-project-data');
     
     $scope.project = {id:   div.getAttribute("data-project-id"),
-                      name: div.getAttribute("data-project-name")                   
+                      name: div.getAttribute("data-project-name"),
+                      company_id: div.getAttribute("data-company-id")                    
                      };
     
     $scope.PprojectId = $scope.project.id;
     $routeParams.id = $scope.project.id;
+    $routeParams.company_id = $scope.project.company_id;
+
+    console.log("showDetailedTicket");
+    console.log(" absUrl   " + $location.absUrl());
+    console.log(" id       " + $routeParams.id);
+    console.log(" projecId " + $routeParams.project_id);
+    console.log(" ticketId " + $routeParams.ticketId);
+          
+    FtryTickets = $resource($location.absUrl() + ".json");    
+    FtryTicket  = $resource("/projects/:project_id/tickets/:id.json");   
+    FtryJobStates =	$resource("/job_states.json");
+    FtryLocations = $resource("/companies/:company_id/locations.json");
+			
+    $scope.loadjobstates = function() {
+	   $scope.jobstates = FtryJobStates.query();
+	}
+	     
+	$scope.jobstateupdate = function() {
+	   $scope.newTicket.job_state_id = $scope.jobstates[0].id; 
+	   console.log(" JobState Selected: " + $scope.newTicket.job_state_id + " Status: OK");
+   }
+
+    $scope.loadlocations = function() {
+	   $scope.locations = FtryLocations.query({ "company_id": $scope.project.company_id });
+	}
+
+	$scope.locationupdate = function() {
+	   $scope.newTicket.location_id = $scope.locations[0].id; 
+	   console.log(" Location Selected: " + $scope.newTicket.location_id + " Status: OK");
+   }
    
-    $scope.tickets = FtryTickets.index();                                                
+    $scope.tickets = FtryTickets.query();                                                
     
     $scope.showDetailedTicket = function(index) {
        var theticket = $scope.tickets[index]
-            
        $routeParams.ticketId = theticket.id;
-       $scope.showinfo = 1; 
+       $routeParams.project_id = theticket.project_id;
        
-       $location.path("/" + theticket.id );
-    }
+       $scope.newTicket = FtryTicket.get({"project_id": $scope.tickets[index].project_id, "id": $scope.tickets[index].id  });
+    }   
 
-    $scope.createTicket = function() {
-    	
-        $scope.showinfo = 1;
-        $location.path("/new");                
-    }
+  $scope.addTicket = function() {
+       console.log("AddTicket");
+       console.log(" absUrl   " + $location.absUrl());
+       console.log(" id       " + $routeParams.id);
+       console.log(" projecId " + $routeParams.project_id);
+       console.log(" ticketId " + $routeParams.ticketId);  	
+  	$routeParams.id = $scope.PprojectId;
+  	$scope.newTicket.project_id = $scope.PprojectId;
+    ticket = FtryTickets.save($scope.newTicket)
+
+    $scope.tickets.push(ticket)
+    $scope.newTicket = {}
+  }
     
    $scope.deleteTicket = function(index) {
      ticket = $scope.tickets[index]
@@ -190,4 +158,3 @@ ticketApp.controller("TicketsCtrl", [ "$scope", "$location", "$resource", "$rout
      $scope.tickets.splice(index, 1);
    }      
 }]);
-

@@ -96,6 +96,7 @@ class PrintingTicketsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def printing_ticket_params
+      debugger
       params.require(:printing_ticket).permit(:name, :subname, :description, :width, :height, :qty, :single, :double, :material_id, :equipment_id, :project_id, :job_state_id, :material_idc, :location_id)
     end
     

@@ -1,5 +1,7 @@
 class TicketsController < ApplicationController
   before_action :set_project_from_params
+  before_action :set_company_in_session
+    
   respond_to :html, :json
 
   def index
@@ -51,12 +53,14 @@ class TicketsController < ApplicationController
   private
 
     def printing_ticket_params
-      params.require(:printing_ticket).permit(:name, :subname, :description, :width, :height, :qty, :single, :double, :material_id, :equipment_id, :project_id, :material_idc, :location_id)
+  
+      params.require(:printing_tickets).permit(:name, :subname, :description, :width, :height, :qty, :single, :double, :material_id, :equipment_id, :project_id, :material_idc, :location_id)
     end
 
     def set_project_from_params
         
        @project_id = params[:project_id]
+       @company_id = Project.find(params[:project_id]).company_id
        
     end
       
